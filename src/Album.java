@@ -15,8 +15,10 @@ public class Album {
     private void addSongstoAlbum(File song){ //adds songs to the album
         this.albumSongs.add(song);
     }
-    private void removeSongsfromAlbum(File song){ //removes song from the album
-        this.albumSongs(song);
+    private void removeSongsfromAlbum(int index){ //removes song from the album
+        /*
+        this.albumSongs.get(index).remove(idk);
+         */
     }
     private void removeAlbum(String albumName){ //removes the album
         this.albumName = null;
