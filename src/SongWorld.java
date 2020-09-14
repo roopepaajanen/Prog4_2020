@@ -1,4 +1,4 @@
-public class MethodHelper {
+public class SongWorld {
 
     //album information
 
