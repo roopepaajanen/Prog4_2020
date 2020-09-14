@@ -12,10 +12,10 @@ public class Album {
     private String getAlbumName(){ //gets the name of the album
         return this.albumName;
     }
-    private void addSongstoAlbum(File song){ //adds songs to the album
+    private void addSongsToAlbum(File song){ //adds songs to the album
         this.albumSongs.add(song);
     }
-    private void removeSongsfromAlbum(int index){ //removes song from the album
+    private void removeSongsFromAlbum(int index){ //removes song from the album
         /*
         this.albumSongs.get(index).remove(idk);
          */
