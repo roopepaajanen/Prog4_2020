@@ -17,6 +17,11 @@ public class Main extends Application {
     }
     roope is still veri geh
 
+    stewu e fortfarande gei
+    stewu e fortfarande gei
+    stewu e fortfarande gei
+    stewu e fortfarande gei
+
     public static void main(String[] args) {
         launch(args);
     }
