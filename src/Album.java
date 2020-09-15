@@ -2,7 +2,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Album {
-    private String albumName; //name of the album
+    protected String albumName; //name of the album
     ArrayList<File> albumSongs = new ArrayList<File>(); //List of songs
 
     public Album(String albumName){
