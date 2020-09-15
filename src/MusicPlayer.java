@@ -1,3 +1,5 @@
+import java.io.File;
+
 public class MusicPlayer {
 
     //album information
@@ -15,11 +17,12 @@ public class MusicPlayer {
     private void pauseMusic(){ //pause Music
 
     }
-    private void createAlbum(){ //create instances of class Album
+    private void createAlbum(String albumName){ //create instances of class Album
+        new Album(albumName);
 
     }
-    private void addSongs(){ //add sound files to instance of class Album
-
+    private void addSongs(String albumName, File file){ //add sound files to instance of class Album
+        Album.getAlbumName(albumName).addSongsToAlbum(SoundClip.getFile(file));
     }
 
 }
