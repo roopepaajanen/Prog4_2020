@@ -4,9 +4,15 @@ import java.util.ArrayList;
 public class Album extends MusicPlayer{
     protected String albumName; //name of the album
     ArrayList<File> albumSongs = new ArrayList<File>(); //List of songs
+    private Album parentAlbum =  null;
 
     public Album(String albumName){
         this.albumName = albumName;
+        parentAlbum = null;
+    }
+    public Album(String albumName, Album parentAlbum){
+        this.albumName = albumName;
+        parentAlbum = parentAlbum;
     }
 
     public Object getAlbumName(){ //gets the name of the album
