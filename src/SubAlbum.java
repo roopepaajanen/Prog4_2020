@@ -3,12 +3,13 @@ import java.util.ArrayList;
 
 public class SubAlbum extends Album{
 
+    ArrayList<File> subAlbum = new ArrayList<File>(); //List of songs in subalbum
 
     public SubAlbum(String albumName) {
         super(albumName);
     }
 
-    public void deleteSubalbum(String albumName){
+    public void deleteSubAlbum(String albumName){
         this.albumName = null;
 
     }
