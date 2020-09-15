@@ -1,7 +1,7 @@
 import java.io.File;
 import java.util.ArrayList;
 
-public class Album {
+public class Album extends MusicPlayer{
     protected String albumName; //name of the album
     ArrayList<File> albumSongs = new ArrayList<File>(); //List of songs
 
@@ -9,10 +9,10 @@ public class Album {
         this.albumName = albumName;
     }
 
-    private String getAlbumName(){ //gets the name of the album
+    public Object getAlbumName(){ //gets the name of the album
         return this.albumName;
     }
-    private void addSongsToAlbum(File song){ //adds songs to the album
+    public void addSongsToAlbum(File song){ //adds songs to the album
         this.albumSongs.add(song);
     }
     private void removeSongsFromAlbum(int index){ //removes song from the album

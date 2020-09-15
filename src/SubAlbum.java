@@ -1,9 +1,8 @@
-import java.io.File;
+/*import java.io.File;
 import java.util.ArrayList;
 
 public class SubAlbum extends Album{
-
-    ArrayList<File> subAlbum = new ArrayList<File>(); //List of songs in subalbum
+    ArrayList<File> subAlbumSongs = new ArrayList<File>(); //List of sub album songs
 
     public SubAlbum(String albumName) {
         super(albumName);
@@ -13,7 +12,8 @@ public class SubAlbum extends Album{
         this.albumName = null;
 
     }
-    public void addSongsToSubAlbum(ArrayList <File> albumSongs, int index){
-        this.albumSongs.add(this.albumSongs.get(index));
+    public void addSongsToSubAlbum(ArrayList <File> albumSongs, File song){
+        this.albumSongs.add(song);
     }
 }
+*/
