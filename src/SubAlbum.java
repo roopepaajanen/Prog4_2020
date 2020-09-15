@@ -7,16 +7,12 @@ public class SubAlbum extends Album{
     public SubAlbum(String albumName) {
         super(albumName);
     }
-    public createSubalbum(String albumName){
-        super(albumName);
-    }
 
-    public deleteSubalbum(String albumName){
-        super(albumName);
-        this.albumName.
+    public void deleteSubalbum(String albumName){
+        this.albumName = null;
 
     }
-    public addSongsToSubAlbum(ArrayList <File> albumSongs, int index,){
-
-        }
+    public void addSongsToSubAlbum(ArrayList <File> albumSongs, int index){
+        this.albumSongs.add(this.albumSongs.get(index));
+    }
 }
