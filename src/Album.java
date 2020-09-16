@@ -31,4 +31,14 @@ public class Album extends MusicPlayer{
     }
 
     //rename method
+
+    private boolean checkAlbumsForSong(String song){ //Returns true if the searched song is in the album, false if not.
+        for(int i=0; i<albumSongs.size(); i++) {
+            if (albumSongs.get(i).equals(song)) {
+                return true;
+            }
+        }
+        return false;
+
+    }
 }
