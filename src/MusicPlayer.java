@@ -21,8 +21,8 @@ public class MusicPlayer {
         new Album(albumName);
 
     }
-    private void addSongs(String albumName, File file){ //add sound files to instance of class Album
-        Album.getAlbumName(albumName).addSongsToAlbum(SoundClip.getFile(file));
+    private void addSongs(SoundClip song){ //add sound files to instance of class Album
+        Album.getAlbumName().addSongsToAlbum(song);
     }
 
 }
