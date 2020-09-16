@@ -30,4 +30,5 @@ public class Album extends MusicPlayer{
         this.albumName = null;
     }
 
+    //rename method
 }

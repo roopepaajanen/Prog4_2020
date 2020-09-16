@@ -22,7 +22,11 @@ public class MusicPlayer {
         new Album(albumName);
 
     }
-    private void addSongs(Album albumInstance, SoundClip song){ //add sound files to instance of class Album
+    public void createSong(String songName, File file){
+        SoundClip song = new SoundClip(file);
+
+    }
+    private void addSongsToAlbum(Album albumInstance, SoundClip song){ //add sound files to instance of class Album
         albumInstance.addSongsToAlbum(song);
     }
 

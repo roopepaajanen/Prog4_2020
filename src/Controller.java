@@ -21,9 +21,12 @@ public class Main extends Application {
     }
 }*/
 
+import java.util.ArrayList;
+
 public class Controller{
     private static MusicPlayer musicPlayer = new MusicPlayer();
     private static UserInputGUI IO = new UserInputGUI();
+    private ArrayList<Album> listOfAlbums = new ArrayList<Album>();
 
     public static void main (String[]args){
 

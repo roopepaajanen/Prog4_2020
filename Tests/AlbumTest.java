@@ -4,18 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AlbumTest {
 
-    @Test
-    void rename() {
-        alb = new Album("asdf");
-        alb.setName("fdsa");
-        assert(alb.getName() == "fdsa");
-    }
+    private Album alb;
 
     @Test
-    void addClip() {
-        alb = new Album("asdf");
-        SoundClip sc = new SoundClip(new File("asd"));
-        alb.addSoundClip(sc);
-        assert(alb.getClips().size() == 1);
+    void getAlbumName() { //test if album name is correct
+        alb = new Album("xyz");
+        assert(alb.albumName == "xyz");
     }
 }
