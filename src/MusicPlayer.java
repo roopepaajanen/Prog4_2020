@@ -17,12 +17,12 @@ public class MusicPlayer {
     private void pauseMusic(){ //pause Music
 
     }
-    private void createAlbum(String albumName){ //create instances of class Album
+    public void createAlbum(String albumName){ //create instances of class Album
         new Album(albumName);
 
     }
-    private void addSongs(SoundClip song){ //add sound files to instance of class Album
-        Album.getAlbumName().addSongsToAlbum(song);
+    private void addSongs(Album albumInstance, SoundClip song){ //add sound files to instance of class Album
+        albumInstance.addSongsToAlbum(song);
     }
 
 }
