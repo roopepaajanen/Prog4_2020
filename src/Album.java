@@ -19,7 +19,7 @@ public class Album extends MusicPlayer{
         return this.albumName;
     }
     public ArrayList<SoundClip> getAlbumSongs(String albumName){
-        return ;
+        return
     }
     public void addSongsToAlbum(SoundClip song){ //adds songs to the album
         this.albumSongs.add(song);
@@ -35,7 +35,7 @@ public class Album extends MusicPlayer{
 
     //rename method
 
-    private boolean checkAlbumsForSong(String song){ //Returns true if the searched song is in the album, false if not.
+    private boolean checkAlbumsForSong(String song){ //Returns true if the searchd song is in the album, false if not.
         for(int i=0; i<albumSongs.size(); i++) {
             if (albumSongs.get(i).equals(song)) {
                 return true;
