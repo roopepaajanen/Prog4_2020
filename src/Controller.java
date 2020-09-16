@@ -22,10 +22,10 @@ public class Main extends Application {
 }*/
 
 public class Controller{
-    MusicPlayer musicPlayer = new MusicPlayer();
-    UserInputGUI IO = new UserInputGUI();
+    private static MusicPlayer musicPlayer = new MusicPlayer();
+    private static UserInputGUI IO = new UserInputGUI();
 
-    public void main (String[]args){
+    public static void main (String[]args){
 
         int choice = Integer.parseInt(IO.getUserInput("Choose your Battle\n1. For Making new album. \n" +
                 "2. For making a new subalbum. \n3. Choosing a new song. \n4.Move a song to an other album"));
@@ -34,22 +34,22 @@ public class Controller{
 
 
     }
-    private void choices(int choice){
+    private static void choices(int choice){
 
         switch(choice) {
             case (1) :{
                 String albumName = IO.getUserInput("Define the Album name");
 
-                createAlbum(albumName);
+               // createAlbum(albumName);
             }
             case (2) :{
-                createSubAlbum();
+               // createSubAlbum();
             }
             case (3) :{
-                newSong();
+                //newSong();
             }
             case (4) :{
-                addSongToAlbum();
+                //addSongToAlbum();
             }
         }
     }
