@@ -47,6 +47,7 @@ public class Controller{
             }
             case (2) :{
                // createSubAlbum();
+
             }
             case (3) :{
                 //newSong();

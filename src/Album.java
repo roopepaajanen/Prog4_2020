@@ -18,10 +18,13 @@ public class Album extends MusicPlayer{
     public String getAlbumName(){ //gets the name of the album
         return this.albumName;
     }
+    public ArrayList<SoundClip> getAlbumSongs(String albumName){
+        return ;
+    }
     public void addSongsToAlbum(SoundClip song){ //adds songs to the album
         this.albumSongs.add(song);
     }
-    private void removeSongsFromAlbum(int index){ //removes song from the album
+    public void removeSongsFromAlbum(int index){ //removes song from the album
         /*
         this.albumSongs.get(index).remove(idk);
          */
@@ -32,13 +35,4 @@ public class Album extends MusicPlayer{
 
     //rename method
 
-    private boolean checkAlbumsForSong(String song){ //Returns true if the searched song is in the album, false if not.
-        for(int i=0; i<albumSongs.size(); i++) {
-            if (albumSongs.get(i).equals(song)) {
-                return true;
-            }
-        }
-        return false;
-
-    }
 }
