@@ -22,6 +22,9 @@ public class MusicPlayer {
         new Album(albumName);
 
     }
+    public void getAlbumSongs(String albumName){
+
+    }
     public void createSong(String songName, File file){
         SoundClip song = new SoundClip(file);
 

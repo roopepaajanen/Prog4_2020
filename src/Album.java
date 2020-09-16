@@ -18,10 +18,13 @@ public class Album extends MusicPlayer{
     public String getAlbumName(){ //gets the name of the album
         return this.albumName;
     }
+    public ArrayList<SoundClip> getAlbumSongs(String albumName){
+        return ;
+    }
     public void addSongsToAlbum(SoundClip song){ //adds songs to the album
         this.albumSongs.add(song);
     }
-    private void removeSongsFromAlbum(int index){ //removes song from the album
+    public void removeSongsFromAlbum(int index){ //removes song from the album
         /*
         this.albumSongs.get(index).remove(idk);
          */
@@ -31,4 +34,5 @@ public class Album extends MusicPlayer{
     }
 
     //rename method
+
 }
