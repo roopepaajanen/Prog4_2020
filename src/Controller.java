@@ -21,16 +21,18 @@ public class Main extends Application {
     }
 }*/
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class Controller{
-    private static MusicPlayer musicPlayer = new MusicPlayer();
+
     private static UserInputGUI IO = new UserInputGUI();
     private ArrayList<Album> listOfAlbums = new ArrayList<Album>();
     private ArrayList<SoundClip> allSongsList = new ArrayList<SoundClip>();
     public Album rootAlbum = new Album("rootAlbum");
+    private File file;
 
-    public static void main (String[]args){
+    public void run(){
 
         int choice = Integer.parseInt(IO.getUserInput("Choose your Battle\n1. For Making new album. \n" +
                 "2. For making a new subalbum. \n3. Choosing a new song. \n4.Move a song to an other album"));
@@ -39,7 +41,9 @@ public class Controller{
             //choose parent album
         }
 
-        choices(choice);
+        choices(choice); //small problem. choices wants to stay static, but none of the other methods want to stay static
+                         //hence becoming a endless loop of making one static and then removing the static variable again
+                         //and again.
 
 
     }
@@ -58,18 +62,25 @@ public class Controller{
 
             }
             case (3):{
+
                 //removeAlbum(albumNameToRemove);
             }
             case (4) :{
-                //newSong(song);
+                SoundClip song = new SoundClip(file);
+                newSong(song);
             }
             case (5):{
+                for (Album alb : rootAlbum.subAlbumList){
+
+                }
                 //addSongToAlbum(desiredAlbumName, songToBeAdded);
             }
             case (6):{
+
                 //getSongsFromAlbum(desiredAlbumName);
             }
             case (7):{
+
                 //removeSongFromAlbum(desiredAlbumName, songToBeRemoved);
             }
         }
