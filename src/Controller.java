@@ -39,7 +39,7 @@ public class Controller{
             //choose parent album
         }
 
-        choices(choice);
+        //choices(choice);
 
 
     }
@@ -75,10 +75,11 @@ public class Controller{
         }
     }
 
+
     public void createAlbum(String albumName){
         this.listOfAlbums.add(new Album(albumName,rootAlbum));
     }
-    private void createSubAlbum(String albumName, Album parentAlbum){
+    public void createSubAlbum(String albumName, Album parentAlbum){
         this.listOfAlbums.add(new Album(albumName, parentAlbum));
     }
     private void removeAlbum(String albumNameToRemove){
@@ -91,10 +92,10 @@ public class Controller{
             }
         }
     }
-    private void newSong(SoundClip song){
+    public void newSong(SoundClip song){
         rootAlbum.albumSongs.add(song);
     }
-    private void addSongToAlbum(String desiredAlbumName, SoundClip songToBeAdded){
+    public void addSongToAlbum(String desiredAlbumName, SoundClip songToBeAdded){
         for (Album alb : rootAlbum.subAlbumList) {
             if(alb.getAlbumName() == desiredAlbumName && !alb.albumSongs.contains(songToBeAdded) ) { //to minimize people from being weird
                 alb.albumSongs.add(songToBeAdded);
@@ -111,14 +112,14 @@ public class Controller{
         return albumSongsList; //in case desiredAlbumName does not exist
     }
     //removes songs from Album
-    private void removeSongFromAlbum(String desiredAlbumName, SoundClip songToBeRemoved){
+    public void removeSongFromAlbum(String desiredAlbumName, SoundClip songToBeRemoved){
         for (Album alb : rootAlbum.subAlbumList) {
             if(alb.getAlbumName() == desiredAlbumName && alb.albumSongs.contains(songToBeRemoved) ) { //to minimize people from being weird
                 alb.albumSongs.remove(songToBeRemoved);
             }
         }
     }
-    private void showAlbumInformation(String desiredAlbumName){
+    public void showAlbumInformation(String desiredAlbumName){
         for (Album alb : rootAlbum.subAlbumList){
             if(alb.getAlbumName() == desiredAlbumName){
                 System.out.println("Album name: " + alb.getAlbumName() + "\nAlbum songs: \n");

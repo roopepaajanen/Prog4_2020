@@ -5,10 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class AlbumTest {
 
     private Album alb;
+    private Controller control;
 
     @Test
     void getAlbumName() { //test if album name is correct
-        alb = new Album("xyz");
-        assert(alb.albumName == "xyz");
+
     }
+
+
 }
