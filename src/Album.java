@@ -1,11 +1,21 @@
-import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Album { //class to create album objects.
     private String albumName; //name of the album
-    ArrayList<SoundClip> albumSongs = new ArrayList<SoundClip>(); //List of songs
+    List<SoundClip> albumSongs = new List <SoundClip>(); //List of songs
     ArrayList<Album> subAlbumList = new ArrayList<Album>(); //List of sub albums for every parent album
     private Album parentAlbum =  null;
+
+    public void addSong(SoundClip song){
+        albumSongs.add(song);
+    }
+    public void removeSong(SoundClip song){
+        albumSongs.remove(song);
+    }
+    public boolean checkAlbumForSong(SoundClip song){
+        return albumSongs.contains(song);
+    }
 
     public Album(String albumName){ //creates the root album
         this.albumName = albumName;
