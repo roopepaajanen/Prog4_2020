@@ -1,13 +1,12 @@
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Album { //class to create album objects.
     private ArrayList<Album> listOfAlbums = new ArrayList<Album>(); //List containing all the albums
     private String albumName; //name of the album
-    LinkedList<SoundClip> albumSongs = new LinkedList<>(); //List of songs
-    LinkedList<Album> subAlbumList = new LinkedList<>(); //List of sub albums for every parent album
+    LinkedList<SoundClip> albumSongs = new LinkedList<SoundClip>(); //List of songs
+    ArrayList<Album> subAlbumList = new ArrayList<Album>(); //List of sub albums for every parent album
     private Album parentAlbum = null;
     private File file; //for future convenience.
     public Album rootAlbum = new Album("rootAlbum"); //initializing the rootAlbum
@@ -57,8 +56,8 @@ public class Album { //class to create album objects.
     }
 
 
-    public ArrayList<SoundClip> getSongsFromAlbum(String desiredAlbumName) {
-        ArrayList<SoundClip> albumSongsList = new ArrayList<SoundClip>(); //empty list of songs, to prevent usage of null.
+    public LinkedList<SoundClip> getSongsFromAlbum(String desiredAlbumName) {
+        LinkedList<SoundClip> albumSongsList = new LinkedList<>(); //empty list of songs, to prevent usage of null.
         for (Album alb : this.listOfAlbums) {
             if (alb.getAlbumName() == desiredAlbumName) {
                 return alb.albumSongs;
@@ -79,7 +78,7 @@ public class Album { //class to create album objects.
 
 
     //method for displaying the specified albums information
-    private void showAlbumInformation(String desiredAlbumName) {
+    private String toString(String desiredAlbumName) {
         for (Album alb : rootAlbum.subAlbumList) {
             if (alb.getAlbumName() == desiredAlbumName) {
                 System.out.println("Album name: " + alb.getAlbumName() + "\nAlbum songs: \n");
@@ -90,7 +89,7 @@ public class Album { //class to create album objects.
                         songNamesString += ", ";
                     }
                 }
-                System.out.println(songNamesString);
+                return(songNamesString);
             }
         }
     }
