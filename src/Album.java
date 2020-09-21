@@ -1,11 +1,13 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Album { //class to create album objects.
     private ArrayList<Album> listOfAlbums = new ArrayList<Album>(); //List containing all the albums
     private String albumName; //name of the album
-    ArrayList<SoundClip> albumSongs = new ArrayList<SoundClip>(); //List of songs
-    ArrayList<Album> subAlbumList = new ArrayList<Album>(); //List of sub albums for every parent album
+    LinkedList<SoundClip> albumSongs = new LinkedList<>(); //List of songs
+    LinkedList<Album> subAlbumList = new LinkedList<>(); //List of sub albums for every parent album
     private Album parentAlbum = null;
     private File file; //for future convenience.
     public Album rootAlbum = new Album("rootAlbum"); //initializing the rootAlbum
