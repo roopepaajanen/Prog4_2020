@@ -7,7 +7,6 @@ public class MusicOrganizerController {
 	private SoundClipBlockingQueue queue;
 	private Album root;
 	private UserInputGUI IO = new UserInputGUI(); //input reader
-	Album album;
 
 	public MusicOrganizerController() {
 
@@ -47,12 +46,12 @@ public class MusicOrganizerController {
 	 */
 	public void addNewAlbum(){ //TODO Update parameters if needed - e.g. you might want to give the currently selected album as parameter
 		// TODO: Add your code here
-		String newAlbumName = IO.getUserInput("Name of the new album?");
-
-		//album.getParentAlbum(newAlbumName);
+		String newAlbumName = view.promptForAlbumName();
 		Album parentAlbum = view.getSelectedAlbum();
-		Album a = new Album(newAlbumName, parentAlbum);
-		//Album parentAlbum = getParentAlbum()
+		Album newAlbum = new Album(newAlbumName, parentAlbum);
+		System.out.println(newAlbum.getAlbumName());
+		view.onAlbumAdded(newAlbum);
+		//Album parentAlbum = getParentAlbum()  *not needed atm*
 	}
 
 	/**
