@@ -3,12 +3,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Album { //class to create album objects.
-    private ArrayList<Album> listOfAlbums = new ArrayList<Album>(); //List containing all the albums
-    private String albumName; //name of the album
-    LinkedList<SoundClip> albumSongs = new LinkedList<SoundClip>(); //List of songs
-    ArrayList<Album> subAlbumList = new ArrayList<Album>(); //List of sub albums for every parent album
-    private Album parentAlbum = null;
-    private File file; //for future convenience.
+    protected ArrayList<Album> listOfAlbums = new ArrayList<Album>(); //List containing all the albums
+    protected String albumName; //name of the album
+    protected LinkedList<SoundClip> albumSongs = new LinkedList<SoundClip>(); //List of songs
+    protected LinkedList<Album> subAlbumList = new LinkedList<>(); //List of sub albums for every parent album
+    protected Album parentAlbum = null;
+    protected File file; //for future convenience.
     public Album rootAlbum = new Album("rootAlbum"); //initializing the rootAlbum
 
 
@@ -25,6 +25,15 @@ public class Album { //class to create album objects.
     public Album(String albumName, Album parentAlbum) { //creates sub albums
         this.albumName = albumName;
         parentAlbum = parentAlbum;
+    }
+
+    public Album getParentAlbum(Album albumName){
+        for (Album alb : rootAlbum.subAlbumList) {
+            if(rootAlbum.subAlbumList.equals(albumName)){
+                return rootAlbum.subAlbumList;
+            }
+        }
+        return null;
     }
 
     public String getAlbumName() { //gets the name of the album
@@ -79,20 +88,25 @@ public class Album { //class to create album objects.
 
     //method for displaying the specified albums information
     private String toString(String desiredAlbumName) {
+        String songNamesString = "";
+
         for (Album alb : rootAlbum.subAlbumList) {
             if (alb.getAlbumName() == desiredAlbumName) {
                 System.out.println("Album name: " + alb.getAlbumName() + "\nAlbum songs: \n");
-                String songNamesString = "";
+                //String songNamesString = "";
                 for (int i = 0; i < alb.albumSongs.size(); i++) { //to make the output nicely separated
                     songNamesString += alb.albumSongs.get(i).toString();
                     if (i < alb.albumSongs.size()) {
                         songNamesString += ", ";
+                        //return (songNamesString);
                     }
                 }
-                return(songNamesString);
             }
         }
+                return (songNamesString);
     }
+
+
 
     /*public void addSongsToAlbum(SoundClip song){ //adds songs to the album
         this.albumSongs.add(song);
@@ -104,6 +118,6 @@ public class Album { //class to create album objects.
         return albumSongs.contains(song);
     }
     */
-
-
 }
+
+

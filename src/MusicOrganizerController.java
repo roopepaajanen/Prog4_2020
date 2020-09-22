@@ -6,6 +6,7 @@ public class MusicOrganizerController {
 	private MusicOrganizerWindow view;
 	private SoundClipBlockingQueue queue;
 	private Album root;
+	Album album;
 	
 	public MusicOrganizerController() {
 		
@@ -36,8 +37,18 @@ public class MusicOrganizerController {
 	/**
 	 * Returns the root album
 	 */
-	public Album getRootAlbum(){
+	public ADD_YOUR_ALBUM_TYPE getRootAlbum(){
 		return root;
+	}
+
+	public Album(String albumName) { //creates the root album
+		this.album.albumName = albumName;
+		album.parentAlbum = null;
+	}
+
+	public Album(String albumName, Album parentAlbum) { //creates sub albums
+		this.albumName = albumName;
+		parentAlbum = parentAlbum;
 	}
 	
 	/**
@@ -50,23 +61,29 @@ public class MusicOrganizerController {
 	/**
 	 * Removes an album from the Music Organizer
 	 */
-	public void deleteAlbum(){ //TODO Update parameters if needed
-		// TODO: Add your code here
-	}
+	public void removeAlbum(String albumNameToRemove) {
+		for (Album alb : rootAlbum.subAlbumList) {
+			for (Album subAlb : alb.subAlbumList) {
+				if (subAlb.getAlbumName() == albumNameToRemove) {
+					rootAlbum.subAlbumList.remove(subAlb);
+					alb.subAlbumList.remove(subAlb);
+				}
+			}
+		}
 	
 	/**
 	 * Adds sound clips to an album
 	 */
-	public void addSoundClips(){ //TODO Update parameters if needed
-		// TODO: Add your code here
-	}
+		public void addSong(SoundClip song) {
+			albumSongs.add(song);
+		}
 	
 	/**
 	 * Removes sound clips from an album
 	 */
-	public void removeSoundClips(){ //TODO Update parameters if needed
-		// TODO: Add your code here
-	}
+		public void removeSong(SoundClip song) {
+			albumSongs.remove(song);
+		}
 	
 	/**
 	 * Puts the selected sound clips on the queue and lets
