@@ -205,14 +205,11 @@ public class MusicOrganizerWindow extends JFrame {
 
 			//DONE!
 			// TODO: Get the parent album of newAlbum
-<<<<<<< HEAD
 			Album parentAlbum = newAlbum.getParentAlbum(newAlbum);
-=======
 			Album parentAlbum;
 			parentAlbum = newAlbum.getParentAlbum();
 			
->>>>>>> origin/master
-			
+
 			if(parentAlbum.equals(parent.getUserObject())){
 				
 				DefaultMutableTreeNode trnode = new DefaultMutableTreeNode();

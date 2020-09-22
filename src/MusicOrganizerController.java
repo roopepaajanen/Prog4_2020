@@ -1,3 +1,4 @@
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -37,7 +38,7 @@ public class MusicOrganizerController {
 	/**
 	 * Returns the root album
 	 */
-	public ADD_YOUR_ALBUM_TYPE getRootAlbum(){
+	public LinkedList getRootAlbum(){
 		return root;
 	}
 
@@ -74,14 +75,14 @@ public class MusicOrganizerController {
 	/**
 	 * Adds sound clips to an album
 	 */
-		public void addSong(SoundClip song) {
+		public void addSoundClips(SoundClip song) {
 			albumSongs.add(song);
 		}
 	
 	/**
 	 * Removes sound clips from an album
 	 */
-		public void removeSong(SoundClip song) {
+		public void removeSoundClips(SoundClip song) {
 			albumSongs.remove(song);
 		}
 	

@@ -24,9 +24,9 @@ public class Album { //class to create album objects.
     /*public void createAlbum(String albumName) {
         this.listOfAlbums.add(new Album(albumName, rootAlbum));
     }*/
-    public Album getParentAlbum(Album newAlbum){
+  /*  public Album getParentAlbum(Album newAlbum){
         parentAlbum = this.getAlbumName();
-    }
+    }*/
 
     public String getAlbumName() { //gets the name of the album
         return this.albumName;
@@ -100,6 +100,27 @@ public class Album { //class to create album objects.
     public String toString(){
         return this.getAlbumName();
     }
+
+    /*private String toString(String desiredAlbumName) {
+        String songNamesString = "";
+
+        for (Album alb : rootAlbum.subAlbumList) {
+            if (alb.getAlbumName() == desiredAlbumName) {
+                System.out.println("Album name: " + alb.getAlbumName() + "\nAlbum songs: \n");
+                //String songNamesString = "";
+                for (int i = 0; i < alb.albumSongs.size(); i++) { //to make the output nicely separated
+                    songNamesString += alb.albumSongs.get(i).toString();
+                    if (i < alb.albumSongs.size()) {
+                        songNamesString += ", ";
+                        //return (songNamesString);
+                    }
+                }
+            }
+        }
+        return (songNamesString);
+    }*/
+
+
 
     /*public void addSongsToAlbum(SoundClip song){ //adds songs to the album
         this.albumSongs.add(song);
