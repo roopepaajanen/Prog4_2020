@@ -7,6 +7,7 @@ public class MusicOrganizerController {
 	private SoundClipBlockingQueue queue;
 	private Album root;
 	private UserInputGUI IO = new UserInputGUI(); //input reader
+	Album album;
 
 	public MusicOrganizerController() {
 
@@ -48,8 +49,9 @@ public class MusicOrganizerController {
 		// TODO: Add your code here
 		String newAlbumName = IO.getUserInput("Name of the new album?");
 
-		//Album a = new Album(newAlbumName, parentAlbum)
-
+		//album.getParentAlbum(newAlbumName);
+		Album parentAlbum = view.getSelectedAlbum();
+		Album a = new Album(newAlbumName, parentAlbum);
 		//Album parentAlbum = getParentAlbum()
 	}
 

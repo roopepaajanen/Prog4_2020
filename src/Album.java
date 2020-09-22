@@ -18,7 +18,7 @@ public class Album { //class to create album objects.
     }
     Album(String albumName, Album parentAlbum) { //creates sub albums
         this.albumName = albumName;
-        parentAlbum = parentAlbum;
+        this.parentAlbum = parentAlbum;
     }
     //method for creating the initial root album
     /*public void createAlbum(String albumName) {

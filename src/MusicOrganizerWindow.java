@@ -116,6 +116,7 @@ public class MusicOrganizerWindow extends JFrame {
 					
 					// TODO YOUR CODE HERE
 					// The code here gets invoked whenever the uses double clicks on the list of sound clips
+
 					
 					System.out.println("clicked on clipTable");
 					
@@ -205,7 +206,7 @@ public class MusicOrganizerWindow extends JFrame {
 
 			//DONE!
 			// TODO: Get the parent album of newAlbum
-			Album parentAlbum = newAlbum.getParentAlbum(newAlbum);
+			//Album parentAlbum = newAlbum.getParentAlbum(newAlbum);
 
 			if(parentAlbum.equals(parent.getUserObject())){
 				
