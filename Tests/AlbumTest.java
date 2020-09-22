@@ -12,7 +12,7 @@ class AlbumTest {
         alb = new Album("1. Album");
         System.out.println(alb.getAlbumName());
         subAlb = new Album("2. Album", alb);
-        assert(alb.getAlbumName().equals("1. Album") );
+        assert(alb.getAlbumName().equals("1. Album"));
         assert(subAlb.getAlbumName().equals("2. Album"));
     }
 
