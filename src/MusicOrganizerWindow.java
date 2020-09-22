@@ -202,11 +202,10 @@ public class MusicOrganizerWindow extends JFrame {
 		//We search for the parent of the newly added Album so we can create the new node in the correct place
 		for(Enumeration e = ((DefaultMutableTreeNode) model.getRoot()).breadthFirstEnumeration(); e.hasMoreElements();){
 			DefaultMutableTreeNode parent = (DefaultMutableTreeNode) e.nextElement();
-			
+
+			//DONE!
 			// TODO: Get the parent album of newAlbum
-			Album parentAlbum;
-			//parentAlbum = newAlbum.getParentAlbum();
-			
+			Album parentAlbum = newAlbum.getParentAlbum(newAlbum);
 			
 			if(parentAlbum.equals(parent.getUserObject())){
 				

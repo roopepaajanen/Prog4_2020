@@ -7,7 +7,7 @@ import java.util.function.BooleanSupplier;
 import static org.junit.jupiter.api.Assertions.*;
 /*
 class ControllerTest {
-    private Controller control;
+    private Controller control = new Co;
     private Album alb;
     ArrayList<SoundClip> testlist = new ArrayList<SoundClip>();
 
