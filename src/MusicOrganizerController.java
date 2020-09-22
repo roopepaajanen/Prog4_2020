@@ -46,11 +46,12 @@ public class MusicOrganizerController {
 	 */
 	public void addNewAlbum(){ //TODO Update parameters if needed - e.g. you might want to give the currently selected album as parameter
 		// TODO: Add your code here
-		String newAlbumName = IO.getUserInput("Name of the new album?");
-
-		//Album a = new Album(newAlbumName, parentAlbum)
-
-		//Album parentAlbum = getParentAlbum()
+		String newAlbumName = view.promptForAlbumName();
+		Album parentAlbum = view.getSelectedAlbum();
+		Album newAlbum = new Album(newAlbumName, parentAlbum);
+		System.out.println(newAlbum.getAlbumName());
+		view.onAlbumAdded(newAlbum);
+		//Album parentAlbum = getParentAlbum()  *not needed atm*
 	}
 
 	/**
