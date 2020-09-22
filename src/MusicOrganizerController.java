@@ -6,19 +6,19 @@ public class MusicOrganizerController {
 	private MusicOrganizerWindow view;
 	private SoundClipBlockingQueue queue;
 	private Album root;
-	Album album;
-	
+	private UserInputGUI IO = new UserInputGUI(); //input reader
+
 	public MusicOrganizerController() {
-		
+
 		// TODO: Create the root album for all sound clips
 		root = new Album("All Sound Clips");
-		
+
 		// Create the View in Model-View-Controller
 		view = new MusicOrganizerWindow(this);
-		
+
 		// Create the blocking queue
 		queue = new SoundClipBlockingQueue();
-		
+
 		// Create a separate thread for the sound clip player and start it
 		(new Thread(new SoundClipPlayer(queue))).start();
 	}
@@ -33,62 +33,51 @@ public class MusicOrganizerController {
 		root.albumSongs.addAll(clips);
 		return clips;
 	}
-	
+
 	/**
 	 * Returns the root album
 	 */
-	public ADD_YOUR_ALBUM_TYPE getRootAlbum(){
+	public Album getRootAlbum(){
 		return root;
 	}
 
-	public Album(String albumName) { //creates the root album
-		this.album.albumName = albumName;
-		album.parentAlbum = null;
-	}
-
-	public Album(String albumName, Album parentAlbum) { //creates sub albums
-		this.albumName = albumName;
-		parentAlbum = parentAlbum;
-	}
-	
 	/**
 	 * Adds an album to the Music Organizer
 	 */
 	public void addNewAlbum(){ //TODO Update parameters if needed - e.g. you might want to give the currently selected album as parameter
 		// TODO: Add your code here
+		String newAlbumName = IO.getUserInput("Name of the new album?");
+
+		//Album a = new Album(newAlbumName, parentAlbum)
+
+		//Album parentAlbum = getParentAlbum()
 	}
-	
+
 	/**
 	 * Removes an album from the Music Organizer
 	 */
-	public void removeAlbum(String albumNameToRemove) {
-		for (Album alb : rootAlbum.subAlbumList) {
-			for (Album subAlb : alb.subAlbumList) {
-				if (subAlb.getAlbumName() == albumNameToRemove) {
-					rootAlbum.subAlbumList.remove(subAlb);
-					alb.subAlbumList.remove(subAlb);
-				}
-			}
-		}
-	
+	public void deleteAlbum(){ //TODO Update parameters if needed
+		// TODO: Add your code here
+	}
+
 	/**
 	 * Adds sound clips to an album
 	 */
-		public void addSong(SoundClip song) {
-			albumSongs.add(song);
-		}
-	
+	public void addSoundClips(){ //TODO Update parameters if needed
+		// TODO: Add your code here
+	}
+
 	/**
 	 * Removes sound clips from an album
 	 */
-		public void removeSong(SoundClip song) {
-			albumSongs.remove(song);
-		}
-	
+	public void removeSoundClips(){ //TODO Update parameters if needed
+		// TODO: Add your code here
+	}
+
 	/**
 	 * Puts the selected sound clips on the queue and lets
 	 * the sound clip player thread play them. Essentially, when
-	 * this method is called, the selected sound clips in the 
+	 * this method is called, the selected sound clips in the
 	 * SoundClipTable are played.
 	 */
 	public void playSoundClips(){

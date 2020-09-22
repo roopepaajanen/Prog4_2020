@@ -24,8 +24,8 @@ public class Album { //class to create album objects.
     /*public void createAlbum(String albumName) {
         this.listOfAlbums.add(new Album(albumName, rootAlbum));
     }*/
-    public Album getParentAlbum(Album newAlbum){
-        parentAlbum = this.getAlbumName();
+    public Album getParentAlbum(Album desiredAlbum){
+        return desiredAlbum.parentAlbum;
     }
 
     public String getAlbumName() { //gets the name of the album
