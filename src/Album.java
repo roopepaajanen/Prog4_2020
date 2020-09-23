@@ -9,8 +9,7 @@ public class Album { //class to create album objects.
     LinkedList<Album> subAlbumList = new LinkedList<Album>(); //List of sub albums for every parent album
     private Album parentAlbum = null;
     private File file; //for future convenience.
-    //public Album rootAlbum = new Album("rootAlbum"); //initializing the rootAlbum
-
+    MusicOrganizerController controller;
 
     Album(String albumName) { //creates the root album
         this.albumName = albumName;
@@ -55,14 +54,33 @@ public class Album { //class to create album objects.
             }
         }
     }
+    public Album getRootAlbum(Album desiredAlbum){
+        for (Album album :listOfAlbums) {
+            if(desiredAlbum.parentAlbum == null){
+                return album;
+            }
+        }
+        return null;
+    }
+
 
     public LinkedList<SoundClip> getSongsFromAlbum(String desiredAlbumName) {
-        int forCounter =0;
+        int forCounter = 0;
         LinkedList<SoundClip> albumSongsList = new LinkedList<>(); //empty list of songs, to prevent usage of null.
-        for (Album alb : this.listOfAlbums) {
-            forCounter++;
-            if (alb.getAlbumName().equals(desiredAlbumName)) {
-                return alb.albumSongs;
+        Album rootalbum = controller.getRootAlbum();
+
+        if(          ) {
+            if(rootalbum.equals(desiredAlbumName)){
+                return rootalbum.albumSongs;
+            }
+        }
+        
+        else {
+            for (Album alb : this.listOfAlbums) {
+                forCounter++;
+                if (alb.getAlbumName().equals(desiredAlbumName)) {
+                    return alb.albumSongs;
+                }
             }
         }
 
