@@ -7,6 +7,7 @@ public class MusicOrganizerController {
 	private SoundClipBlockingQueue queue;
 	private Album root;
 	private UserInputGUI IO = new UserInputGUI(); //input reader
+	private int albumAmount = 0;
 
 	public MusicOrganizerController() {
 
@@ -31,6 +32,7 @@ public class MusicOrganizerController {
 		Set<SoundClip> clips = SoundClipLoader.loadSoundClips(path);
 		// TODO: Add the loaded sound clips to the root album
 		root.albumSongs.addAll(clips);
+		System.out.println(root.albumSongs);
 		return clips;
 	}
 
@@ -51,6 +53,7 @@ public class MusicOrganizerController {
 		Album newAlbum = new Album(newAlbumName, parentAlbum);
 		//System.out.println(newAlbum.getAlbumName());
 		view.onAlbumAdded(newAlbum);
+		albumAmount++;
 		
 	}
 
@@ -58,7 +61,15 @@ public class MusicOrganizerController {
 	 * Removes an album from the Music Organizer
 	 */
 	public void deleteAlbum(){ //TODO Update parameters if needed
-		// TODO: Add your code here
+		Album deleteAlbum = view.getSelectedAlbum();
+
+		if(albumAmount>0) {
+			view.onAlbumRemoved(deleteAlbum);
+			albumAmount--;
+		}
+		else{
+			System.out.println("Create first an album");
+		}
 	}
 
 	/**

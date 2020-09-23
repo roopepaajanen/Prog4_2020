@@ -16,5 +16,10 @@ class AlbumTest {
         assert(subAlb.getAlbumName().equals("2. Album"));
     }
 
+    @Test
+    void getSongsFromAlbum(String desiredAlbumName){
+
+    }
+
 
 }
