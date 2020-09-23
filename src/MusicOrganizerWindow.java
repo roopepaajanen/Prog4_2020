@@ -120,7 +120,7 @@ public class MusicOrganizerWindow extends JFrame {
 					
 					// TODO YOUR CODE HERE
 					// The code here gets invoked whenever the uses double clicks on the list of sound clips
-
+					controller.playSoundClips();
 					
 					System.out.println("clicked on clipTable");
 					
@@ -210,7 +210,7 @@ public class MusicOrganizerWindow extends JFrame {
 
 			//DONE!
 			// TODO: Get the parent album of newAlbum
-			Album parentAlbum = newAlbum.getParentAlbum(newAlbum);
+			Album parentAlbum = newAlbum.getParentAlbum();
 
 			if(parentAlbum.equals(parent.getUserObject())){
 				
@@ -237,8 +237,13 @@ public class MusicOrganizerWindow extends JFrame {
 		for(Enumeration e = ((DefaultMutableTreeNode) model.getRoot()).breadthFirstEnumeration(); e.hasMoreElements();){
 			DefaultMutableTreeNode current = (DefaultMutableTreeNode) e.nextElement();
 			if(album.equals(current.getUserObject())){
-				if(current != null){
-					model.removeNodeFromParent(current);
+				try{
+					if(current != null){
+						model.removeNodeFromParent(current);
+					}
+				}
+				catch (NullPointerException error){
+					System.out.println("that aint workin mate!");
 				}
 			}
 		}

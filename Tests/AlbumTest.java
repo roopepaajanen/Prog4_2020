@@ -1,7 +1,5 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class AlbumTest {
 
     private Album alb;
@@ -10,10 +8,10 @@ class AlbumTest {
     @Test
     void getAlbumName() { //test if album name is correct and the getAlbumName() method works.
         alb = new Album("1. Album");
-        System.out.println(alb.getAlbumName());
+        System.out.println(alb.toString());
         subAlb = new Album("2. Album", alb);
-        assert(alb.getAlbumName().equals("1. Album"));
-        assert(subAlb.getAlbumName().equals("2. Album"));
+        assert(alb.toString().equals("1. Album"));
+        assert(subAlb.toString().equals("2. Album"));
     }
 
     @Test

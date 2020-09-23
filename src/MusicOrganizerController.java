@@ -34,8 +34,8 @@ public class MusicOrganizerController {
 		Set<SoundClip> clips = SoundClipLoader.loadSoundClips(path);
 		//DONE!
 		// TODO: Add the loaded sound clips to the root album
-		root.albumSoundClips.addAll(clips);
-		System.out.println(root.albumSoundClips);
+		root.desiredAlbumSoundClips.addAll(clips);
+		System.out.println(root.desiredAlbumSoundClips);
 		return clips;
 	}
 
@@ -100,6 +100,10 @@ public class MusicOrganizerController {
 	 */
 	public void removeSoundClips(){ //TODO Update parameters if needed
 		// TODO: Add your code here
+		for (SoundClip clip : view.getSelectedSoundClips()) {
+			view.getSelectedAlbum().removeSoundClip(clip);
+		}
+		view.onClipsUpdated();
 	}
 
 	/**
