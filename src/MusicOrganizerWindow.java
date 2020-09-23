@@ -95,8 +95,9 @@ public class MusicOrganizerWindow extends JFrame {
 					
 					// TODO YOUR CODE HERE
 					// The code here gets invoked whenever the user double clicks in the album tree
-					
-					
+					Album album = getSelectedAlbum();
+					clipTable.display(album);
+
 					System.out.println("show the sound clips for album " + getSelectedTreeNode().getUserObject());
 				}
 			}
@@ -209,7 +210,7 @@ public class MusicOrganizerWindow extends JFrame {
 
 			//DONE!
 			// TODO: Get the parent album of newAlbum
-			//Album parentAlbum = newAlbum.getParentAlbum(newAlbum);
+			Album parentAlbum = newAlbum.getParentAlbum(newAlbum);
 
 			if(parentAlbum.equals(parent.getUserObject())){
 				

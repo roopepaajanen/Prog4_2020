@@ -56,14 +56,19 @@ public class Album { //class to create album objects.
         }
     }
 
-
     public LinkedList<SoundClip> getSongsFromAlbum(String desiredAlbumName) {
+        int forCounter =0;
         LinkedList<SoundClip> albumSongsList = new LinkedList<>(); //empty list of songs, to prevent usage of null.
         for (Album alb : this.listOfAlbums) {
-            if (alb.getAlbumName() == desiredAlbumName) {
+            forCounter++;
+            if (alb.getAlbumName().equals(desiredAlbumName)) {
                 return alb.albumSongs;
             }
         }
+
+        System.out.println("FORCOUNTER NO");
+        System.out.println(forCounter);
+        System.out.println("FORCOUNTER YES?");
         return albumSongsList; //in case desiredAlbumName does not exist
     }
 
