@@ -6,10 +6,7 @@ public class MusicOrganizerController {
 	private MusicOrganizerWindow view;
 	private SoundClipBlockingQueue queue;
 	private Album root;
-	//private UserInputGUI IO = new UserInputGUI(); //input reader
 	private int albumAmount = 0;
-	private SoundClipTable clipTable;
-
 
 	public MusicOrganizerController() {
 
@@ -32,7 +29,6 @@ public class MusicOrganizerController {
 	 */
 	public Set<SoundClip> loadSoundClips(String path) {
 		Set<SoundClip> clips = SoundClipLoader.loadSoundClips(path);
-		//DONE!
 		// TODO: Add the loaded sound clips to the root album
 		root.desiredAlbumSoundClips.addAll(clips);
 		System.out.println(root.desiredAlbumSoundClips);
@@ -66,7 +62,8 @@ public class MusicOrganizerController {
 	/**
 	 * Removes an album from the Music Organizer
 	 */
-	public void deleteAlbum() throws NullPointerException{ //TODO Update parameters if needed
+	public void deleteAlbum() throws NullPointerException{
+		//TODO: Add your code here
 		try {
 			Album deleteAlbum = view.getSelectedAlbum();
 			if (albumAmount > 0) {
@@ -82,7 +79,7 @@ public class MusicOrganizerController {
 	/**
 	 * Adds sound clips to an album
 	 */
-	public void addSoundClips() throws NullPointerException{ //TODO Update parameters if needed
+	public void addSoundClips() throws NullPointerException{
 		// TODO: Add your code here
 		try {
 			for (SoundClip clip : view.getSelectedSoundClips()){
@@ -98,7 +95,7 @@ public class MusicOrganizerController {
 	/**
 	 * Removes sound clips from an album
 	 */
-	public void removeSoundClips(){ //TODO Update parameters if needed
+	public void removeSoundClips(){
 		// TODO: Add your code here
 		for (SoundClip clip : view.getSelectedSoundClips()) {
 			view.getSelectedAlbum().removeSoundClip(clip);

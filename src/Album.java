@@ -27,6 +27,11 @@ public class Album { //class to create album objects.
         return parentAlbum;
     }
 
+    //gets the sound clips from the desired album and returns them as a list.
+    public List<SoundClip> getSoundClipsFromAlbum(Album desiredAlbum) {
+        return desiredAlbum.desiredAlbumSoundClips;
+    }
+
     //toString method to return the name of the album as a String
     public String toString() {
         return albumName;
@@ -42,12 +47,7 @@ public class Album { //class to create album objects.
         }
     }
 
-    //gets the sound clips from the desired album and returns them as a list.
-    public List<SoundClip> getSoundClipsFromAlbum(Album desiredAlbum) {
-        return desiredAlbum.desiredAlbumSoundClips;
-    }
-
-    //removes sound clip from specified Album
+    //removes sound clip from specified Album recursively
     public void removeSoundClip(SoundClip clipToBeRemoved) {
         for (Album album : subAlbumList) {
             album.removeSoundClip(clipToBeRemoved);
