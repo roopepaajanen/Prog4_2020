@@ -6,10 +6,9 @@ public class Album { //class to create album objects.
     private ArrayList<Album> listOfAlbums = new ArrayList<Album>(); //List containing all the albums
     private String albumName; //name of the album
     LinkedList<SoundClip> albumSongs = new LinkedList<SoundClip>(); //List of songs
-    LinkedList<Album> subAlbumList = new LinkedList<Album>(); //List of sub albums for every parent album
+    private LinkedList<Album> subAlbumList = new LinkedList<Album>(); //List of sub albums for every parent album
     private Album parentAlbum = null;
     private File file; //for future convenience.
-    //public Album rootAlbum = new Album("rootAlbum"); //initializing the rootAlbum
 
 
     Album(String albumName) { //creates the root album
@@ -24,6 +23,15 @@ public class Album { //class to create album objects.
     /*public void createAlbum(String albumName) {
         this.listOfAlbums.add(new Album(albumName, rootAlbum));
     }*/
+    public Album getRootAlbum(Album desiredAlbum){
+        for (Album album :listOfAlbums) {
+            if(desiredAlbum.parentAlbum == null){
+                return album;
+            }
+        }
+        return null;
+    }
+
     public Album getParentAlbum(Album desiredAlbum){
         return desiredAlbum.parentAlbum;
     }
@@ -45,10 +53,10 @@ public class Album { //class to create album objects.
     }
 
 
-    private void removeAlbum(String albumNameToRemove) {
+    private void removeAlbum(Album albumToRemove) {
         for (Album alb : this.subAlbumList) {
             for (Album subAlb : alb.subAlbumList) {
-                if (subAlb.getAlbumName() == albumNameToRemove) {
+                if (/*subAlb.getAlbumName() == albumNameToRemove*/ listOfAlbums.contains(albumToRemove)) {
                     this.subAlbumList.remove(subAlb);
                     alb.subAlbumList.remove(subAlb);
                 }
@@ -79,7 +87,6 @@ public class Album { //class to create album objects.
 
 
     //method for displaying the specified albums information
-
     //STILL NEEDS TWEAKING...
     private String displayAlbumInformation(String desiredAlbumName) {
         for (Album alb : this.subAlbumList) {

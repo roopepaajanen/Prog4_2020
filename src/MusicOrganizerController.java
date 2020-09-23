@@ -49,7 +49,7 @@ public class MusicOrganizerController {
 		String newAlbumName = view.promptForAlbumName();
 		Album parentAlbum = view.getSelectedAlbum();
 		Album newAlbum = new Album(newAlbumName, parentAlbum);
-		System.out.println(newAlbum.getAlbumName());
+		//System.out.println(newAlbum.getAlbumName());
 		view.onAlbumAdded(newAlbum);
 		
 	}
