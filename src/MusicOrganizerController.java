@@ -6,8 +6,10 @@ public class MusicOrganizerController {
 	private MusicOrganizerWindow view;
 	private SoundClipBlockingQueue queue;
 	private Album root;
-	private UserInputGUI IO = new UserInputGUI(); //input reader
+	//private UserInputGUI IO = new UserInputGUI(); //input reader
 	private int albumAmount = 0;
+	private SoundClipTable clipTable;
+
 
 	public MusicOrganizerController() {
 
@@ -30,9 +32,10 @@ public class MusicOrganizerController {
 	 */
 	public Set<SoundClip> loadSoundClips(String path) {
 		Set<SoundClip> clips = SoundClipLoader.loadSoundClips(path);
+		//DONE!
 		// TODO: Add the loaded sound clips to the root album
-		root.albumSongs.addAll(clips);
-		System.out.println(root.albumSongs);
+		root.albumSoundClips.addAll(clips);
+		System.out.println(root.albumSoundClips);
 		return clips;
 	}
 
@@ -46,37 +49,50 @@ public class MusicOrganizerController {
 	/**
 	 * Adds an album to the Music Organizer
 	 */
-	public void addNewAlbum(){
+	public void addNewAlbum() throws NullPointerException{
 		// TODO: Add your code here
-		String newAlbumName = view.promptForAlbumName();
-		Album parentAlbum = view.getSelectedAlbum();
-		Album newAlbum = new Album(newAlbumName, parentAlbum);
-		//System.out.println(newAlbum.getAlbumName());
-		view.onAlbumAdded(newAlbum);
-		albumAmount++;
-		
+		try {
+			String newAlbumName = view.promptForAlbumName();
+			Album parentAlbum = view.getSelectedAlbum();
+			Album newAlbum = new Album(newAlbumName, parentAlbum);
+			view.onAlbumAdded(newAlbum);
+			albumAmount++;
+		}
+		catch (NullPointerException e){
+			view.showMessage("Select an album first!");
+		}
 	}
 
 	/**
 	 * Removes an album from the Music Organizer
 	 */
-	public void deleteAlbum(){ //TODO Update parameters if needed
-		Album deleteAlbum = view.getSelectedAlbum();
-
-		if(albumAmount>0) {
-			view.onAlbumRemoved(deleteAlbum);
-			albumAmount--;
+	public void deleteAlbum() throws NullPointerException{ //TODO Update parameters if needed
+		try {
+			Album deleteAlbum = view.getSelectedAlbum();
+			if (albumAmount > 0) {
+				view.onAlbumRemoved(deleteAlbum);
+				albumAmount--;
+			}
 		}
-		else{
-			System.out.println("Create first an album");
+		catch (NullPointerException e){
+			view.showMessage("Create an album first!");
 		}
 	}
 
 	/**
 	 * Adds sound clips to an album
 	 */
-	public void addSoundClips(){ //TODO Update parameters if needed
+	public void addSoundClips() throws NullPointerException{ //TODO Update parameters if needed
 		// TODO: Add your code here
+		try {
+			for (SoundClip clip : view.getSelectedSoundClips()){
+				view.getSelectedAlbum().addSoundClip(clip);
+			}
+			view.onClipsUpdated();
+		}
+		catch (NullPointerException e){
+			view.showMessage("Select an album first!");
+		}
 	}
 
 	/**

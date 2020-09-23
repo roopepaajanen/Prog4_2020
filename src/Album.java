@@ -5,11 +5,10 @@ import java.util.LinkedList;
 public class Album { //class to create album objects.
     private ArrayList<Album> listOfAlbums = new ArrayList<Album>(); //List containing all the albums
     private String albumName; //name of the album
-    LinkedList<SoundClip> albumSongs = new LinkedList<SoundClip>(); //List of songs
+    LinkedList<SoundClip> albumSoundClips = new LinkedList<SoundClip>(); //List of sound clips
     private LinkedList<Album> subAlbumList = new LinkedList<Album>(); //List of sub albums for every parent album
     private Album parentAlbum = null;
     private File file; //for future convenience.
-
 
     Album(String albumName) { //creates the root album
         this.albumName = albumName;
@@ -19,10 +18,8 @@ public class Album { //class to create album objects.
         this.albumName = albumName;
         this.parentAlbum = parentAlbum;
     }
-    //method for creating the initial root album
-    /*public void createAlbum(String albumName) {
-        this.listOfAlbums.add(new Album(albumName, rootAlbum));
-    }*/
+
+    //method for finding the root album inside the Album class
     public Album getRootAlbum(Album desiredAlbum){
         for (Album album :listOfAlbums) {
             if(desiredAlbum.parentAlbum == null){
@@ -40,23 +37,23 @@ public class Album { //class to create album objects.
         return this.albumName;
     }
 
-    public void addSong(SoundClip song) {
-        albumSongs.add(song);
+    public void addSoundClip(SoundClip song) {
+        albumSoundClips.add(song);
     }
 
     public void removeSong(SoundClip song) {
-        albumSongs.remove(song);
+        albumSoundClips.remove(song);
     }
 
     public boolean checkAlbumForSong(SoundClip song) {
-        return albumSongs.contains(song);
+        return albumSoundClips.contains(song);
     }
 
 
     private void removeAlbum(Album albumToRemove) {
         for (Album alb : this.subAlbumList) {
             for (Album subAlb : alb.subAlbumList) {
-                if (/*subAlb.getAlbumName() == albumNameToRemove*/ listOfAlbums.contains(albumToRemove)) {
+                if (listOfAlbums.contains(albumToRemove)) {
                     this.subAlbumList.remove(subAlb);
                     alb.subAlbumList.remove(subAlb);
                 }
@@ -64,28 +61,29 @@ public class Album { //class to create album objects.
         }
     }
 
-
-    public LinkedList<SoundClip> getSongsFromAlbum(String desiredAlbumName) {
-        LinkedList<SoundClip> albumSongsList = new LinkedList<>(); //empty list of songs, to prevent usage of null.
+    public LinkedList<SoundClip> getSongsFromAlbum(Album desiredAlbum) {
+        /*LinkedList<SoundClip> albumSongsList = new LinkedList<>(); //empty list of songs, to prevent usage of null.
         for (Album alb : this.listOfAlbums) {
-            if (alb.getAlbumName() == desiredAlbumName) {
+            if(alb.equals(desiredAlbum)) {
                 return alb.albumSongs;
             }
         }
-        return albumSongsList; //in case desiredAlbumName does not exist
+        return albumSongsList; //in case desiredAlbumName does not exist*/
+        return desiredAlbum.albumSoundClips;
     }
 
 
-    //removes songs from specified Album
-    private void removeSongFromAlbum(String desiredAlbumName, SoundClip songToBeRemoved) {
+    //MAKE RECURSIVE
+    //removes sound clip from specified Album
+    private void removeSongFromAlbum(String desiredAlbumName, SoundClip clipToBeRemoved) {
         for (Album alb : this.subAlbumList) {
-            if (alb.getAlbumName() == desiredAlbumName && alb.albumSongs.contains(songToBeRemoved)) { //to minimize people from being weird
-                alb.albumSongs.remove(songToBeRemoved);
+            if (alb.getAlbumName() == desiredAlbumName && alb.albumSoundClips.contains(clipToBeRemoved)) { //to minimize people from being weird
+                alb.albumSoundClips.remove(clipToBeRemoved);
             }
         }
     }
 
-
+    /*
     //method for displaying the specified albums information
     //STILL NEEDS TWEAKING...
     private String displayAlbumInformation(String desiredAlbumName) {
@@ -93,9 +91,9 @@ public class Album { //class to create album objects.
             if (alb.getAlbumName() == desiredAlbumName) {
                 System.out.println("Album name: " + alb.getAlbumName() + "\nAlbum songs: \n");
                 String songNamesString = "";
-                for (int i = 0; i < alb.albumSongs.size(); i++) { //to make the output nicely separated
-                    songNamesString += alb.albumSongs.get(i).toString();
-                    if (i < alb.albumSongs.size()) {
+                for (int i = 0; i < alb.albumSoundClips.size(); i++) { //to make the output nicely separated
+                    songNamesString += alb.albumSoundClips.get(i).toString();
+                    if (i < alb.albumSoundClips.size()) {
                         songNamesString += ", ";
                     }
                 }
@@ -104,6 +102,9 @@ public class Album { //class to create album objects.
         }
         return("");
     }
+     */
+
+    //toString method to return the name of the album as a String
     public String toString(){
         return this.getAlbumName();
     }
