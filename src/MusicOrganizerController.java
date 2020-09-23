@@ -7,7 +7,9 @@ public class MusicOrganizerController {
 	private SoundClipBlockingQueue queue;
 	private Album root;
 	private UserInputGUI IO = new UserInputGUI(); //input reader
+	private SoundClipTable clipTable;
 	private int albumAmount = 0;
+	private Album album;
 
 	public MusicOrganizerController() {
 
@@ -68,7 +70,7 @@ public class MusicOrganizerController {
 			albumAmount--;
 		}
 		else{
-			System.out.println("Create first an album");
+			view.showMessage("Create first an album");
 		}
 	}
 
@@ -76,7 +78,10 @@ public class MusicOrganizerController {
 	 * Adds sound clips to an album
 	 */
 	public void addSoundClips(){ //TODO Update parameters if needed
-		// TODO: Add your code here
+		Album selectedAlbum = view.getSelectedAlbum();
+		view.onClipsUpdated();
+		SoundClip clip = (SoundClip) view.getSelectedSoundClips();
+		selectedAlbum.addSong(clip);
 	}
 
 	/**

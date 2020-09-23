@@ -64,30 +64,8 @@ public class Album { //class to create album objects.
     }
 
 
-    public LinkedList<SoundClip> getSongsFromAlbum(String desiredAlbumName) {
-        int forCounter = 0;
-        LinkedList<SoundClip> albumSongsList = new LinkedList<>(); //empty list of songs, to prevent usage of null.
-        Album rootalbum = controller.getRootAlbum();
-
-        if(          ) {
-            if(rootalbum.equals(desiredAlbumName)){
-                return rootalbum.albumSongs;
-            }
-        }
-        
-        else {
-            for (Album alb : this.listOfAlbums) {
-                forCounter++;
-                if (alb.getAlbumName().equals(desiredAlbumName)) {
-                    return alb.albumSongs;
-                }
-            }
-        }
-
-        System.out.println("FORCOUNTER NO");
-        System.out.println(forCounter);
-        System.out.println("FORCOUNTER YES?");
-        return albumSongsList; //in case desiredAlbumName does not exist
+    public LinkedList<SoundClip> getSongsFromAlbum(Album a) {
+        return a.albumSongs;
     }
 
 
