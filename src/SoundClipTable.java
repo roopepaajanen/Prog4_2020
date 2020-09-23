@@ -22,7 +22,6 @@ public class SoundClipTable extends JList {
 	public void display(Album a){
 		this.clearTable();
 
-		//DONE!
 		// TODO: Add all sound clips found in 'a'
 		// to the instance variable 'clips'.
 		clips.addAll(a.getSoundClipsFromAlbum(a));

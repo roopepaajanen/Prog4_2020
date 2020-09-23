@@ -65,9 +65,6 @@ public class MusicOrganizerWindow extends JFrame {
 
 	/**
 	 * Make the tree showing album names.
-	 *
-	 * 		FOR THE LEFT SIDE OF THE GUI!
-	 *
 	 */
 	private JTree makeCatalogTree() {
 		
