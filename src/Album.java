@@ -2,19 +2,20 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Album { //class to create album objects.
+//class to create album objects.
+public class Album {
     private String albumName; //name of the album
     public List<SoundClip> desiredAlbumSoundClips; //List of sound clips
     private List<Album> subAlbumList; //List of sub albums for every parent album
-    private Album parentAlbum = null;
+    private Album parentAlbum;
 
-    Album(String albumName) { //creates the root album
+    Album(String albumName) { //constructor that creates the root album
         this.albumName = albumName;
         parentAlbum = null;
         desiredAlbumSoundClips = new LinkedList<SoundClip>();
         subAlbumList = new LinkedList<Album>();
     }
-    Album(String albumName, Album parentAlbum) { //creates sub albums
+    Album(String albumName, Album parentAlbum) { //constructor that creates sub albums
         this.albumName = albumName;
         this.parentAlbum = parentAlbum;
         desiredAlbumSoundClips = new LinkedList<SoundClip>();
@@ -22,7 +23,7 @@ public class Album { //class to create album objects.
         parentAlbum.subAlbumList.add(this);
     }
 
-    //gets the parent album
+    //accessor that returns the parent album
     public Album getParentAlbum(){
         return parentAlbum;
     }
@@ -30,6 +31,11 @@ public class Album { //class to create album objects.
     //gets the sound clips from the desired album and returns them as a list.
     public List<SoundClip> getSoundClipsFromAlbum(Album desiredAlbum) {
         return desiredAlbum.desiredAlbumSoundClips;
+    }
+
+    //checks if a sound clip is present in an album's list of sound clips.
+    public boolean containsClip(SoundClip clip){
+        return desiredAlbumSoundClips.contains(clip);
     }
 
     //toString method to return the name of the album as a String
