@@ -1,22 +1,20 @@
+import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
-
 import java.io.File;
-import java.util.List;
-
 import static junit.framework.TestCase.*;
+import static org.junit.Assert.assertNotEquals;
 
 class AlbumTest {
-    Album album;
-
+    MusicOrganizerController controller = new MusicOrganizerController();
+    SoundClip clip = new SoundClip(new File("random_song_name"));
     Album rootAlbum = new Album("root");
     Album subi1 = new Album("subi 1",rootAlbum);
     Album subi2 = new Album("subi 2",rootAlbum);
     Album subiSubi1 = new Album("subi subi 1",subi1);
     Album subiSubi2 = new Album("subi subi 2",subi2);
-    private List<SoundClip> clips;
 
 
-    //test if album name is correct and the getAlbumName() method works.
+    /**test if album name is correct and the getAlbumName() method works.*/
     @Test
     void checkForNames() {
         assert (rootAlbum.toString().equals("root"));
@@ -25,50 +23,46 @@ class AlbumTest {
         assert (subiSubi1.toString().equals("subi subi 1"));
         assert (subiSubi2.toString().equals("subi subi 2"));
         assertEquals("root",rootAlbum.toString());
-
     }
 
-    //testing that the parent albums are correctly corresponded to their sub albums and vice versa
+    /**testing that the parent albums are correctly corresponded to their sub albums and vice versa. */
     @Test
     void getParentAlbum() {
-        assertTrue(subi1.getParentAlbum().equals(rootAlbum));
-        assertFalse(rootAlbum.getParentAlbum().equals(subi1));
+        assertEquals(subi1.getParentAlbum(), rootAlbum);
+        assertNotEquals(rootAlbum.getParentAlbum(), subi1);
 
-        assertTrue(subi2.getParentAlbum().equals(rootAlbum));
-        assertFalse(rootAlbum.getParentAlbum().equals(subi2));
+        assertEquals(subi2.getParentAlbum(), rootAlbum);
+        assertNotEquals(rootAlbum.getParentAlbum(), subi2);
 
-        assertTrue(subiSubi1.getParentAlbum().equals(subi1));
-        assertFalse(subi1.getParentAlbum().equals(subiSubi1));
+        assertEquals(subiSubi1.getParentAlbum(), subi1);
+        assertNotEquals(subi1.getParentAlbum(), subiSubi1);
 
-        assertTrue(subiSubi2.getParentAlbum().equals(subi2));
-        assertFalse(subi2.getParentAlbum().equals(subiSubi2));
+        assertEquals(subiSubi2.getParentAlbum(), subi2);
+        assertNotEquals(subi2.getParentAlbum(), subiSubi2);
 
-        assertFalse(subiSubi1.getParentAlbum().equals(rootAlbum));
-        assertFalse(rootAlbum.getParentAlbum().equals(subiSubi1));
-        assertFalse(subiSubi2.getParentAlbum().equals(rootAlbum));
-        assertFalse(rootAlbum.getParentAlbum().equals(subiSubi2));
+        assertNotEquals(subiSubi1.getParentAlbum(), rootAlbum);
+        assertNotEquals(rootAlbum.getParentAlbum(), subiSubi1);
+        assertNotEquals(subiSubi2.getParentAlbum(), rootAlbum);
+        assertNotEquals(rootAlbum.getParentAlbum(), subiSubi2);
     }
 
-    @Test
-    void testToString() {
-
-    }
-
+    /**test case to check if a sound clip can be added and removed successfully. */
     @Test
     void addAndRemoveSoundClip() {
-
-        SoundClip clip = new SoundClip(new File("testi"));
-
         rootAlbum.addSoundClip(clip);
-
         assertTrue("Sound clip added incorrectly", rootAlbum.containsClip(clip));
-
         rootAlbum.removeSoundClip(clip);
-
         assertFalse("Sound clip was removed incorrectly", rootAlbum.containsClip(clip));
     }
 
+    /**@Test
+    void checkAlbumGetsRemoved(){
+        controller.deleteAlbum();
+        assertFalse(subiSubi1.getParentAlbum().);
 
+    }*/
+
+    /**test case to check if an album contains certain sound clips. */
     SoundClip clip1 = new SoundClip(new File("testi1"));
     SoundClip clip2 = new SoundClip(new File("testi2"));
     SoundClip clip3 = new SoundClip(new File("testi3"));
@@ -83,5 +77,4 @@ class AlbumTest {
         assertTrue(rootAlbum.desiredAlbumSoundClips.contains(clip3));
 
     }
-
 }
