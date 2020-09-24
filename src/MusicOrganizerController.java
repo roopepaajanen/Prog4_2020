@@ -70,6 +70,9 @@ public class MusicOrganizerController {
 				view.onAlbumRemoved(deleteAlbum);
 				albumAmount--;
 			}
+			if(deleteAlbum==root){
+				view.showMessage("You can't delete rootalbum :(");
+			}
 		}
 		catch (NullPointerException e){
 			view.showMessage("Create an album first!");

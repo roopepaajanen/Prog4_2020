@@ -1,14 +1,20 @@
 import org.junit.jupiter.api.Test;
+
 import java.io.File;
+import java.util.List;
+
 import static junit.framework.TestCase.*;
 
 class AlbumTest {
+    Album album;
 
     Album rootAlbum = new Album("root");
     Album subi1 = new Album("subi 1",rootAlbum);
     Album subi2 = new Album("subi 2",rootAlbum);
     Album subiSubi1 = new Album("subi subi 1",subi1);
     Album subiSubi2 = new Album("subi subi 2",subi2);
+    private List<SoundClip> clips;
+
 
     //test if album name is correct and the getAlbumName() method works.
     @Test
@@ -49,17 +55,33 @@ class AlbumTest {
     }
 
     @Test
-    void addSoundClip() {
+    void addAndRemoveSoundClip() {
 
+        SoundClip clip = new SoundClip(new File("testi"));
+
+        rootAlbum.addSoundClip(clip);
+
+        assertTrue("Sound clip added incorrectly", rootAlbum.containsClip(clip));
+
+        rootAlbum.removeSoundClip(clip);
+
+        assertFalse("Sound clip was removed incorrectly", rootAlbum.containsClip(clip));
     }
 
+
+    SoundClip clip1 = new SoundClip(new File("testi1"));
+    SoundClip clip2 = new SoundClip(new File("testi2"));
+    SoundClip clip3 = new SoundClip(new File("testi3"));
     @Test
     void getSoundClipsFromAlbum() {
+        rootAlbum.addSoundClip(clip1);
+        rootAlbum.addSoundClip(clip2);
+        rootAlbum.addSoundClip(clip3);
+
+        assertTrue(rootAlbum.desiredAlbumSoundClips.contains(clip1));
+        assertTrue(rootAlbum.desiredAlbumSoundClips.contains(clip2));
+        assertTrue(rootAlbum.desiredAlbumSoundClips.contains(clip3));
 
     }
 
-    @Test
-    void removeSoundClip() {
-
-    }
 }

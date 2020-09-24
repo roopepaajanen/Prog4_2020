@@ -54,4 +54,8 @@ public class Album { //class to create album objects.
         }
         desiredAlbumSoundClips.remove(clipToBeRemoved);
     }
+
+    public boolean containsClip(SoundClip clip){
+        return desiredAlbumSoundClips.contains(clip);
+    }
 }
