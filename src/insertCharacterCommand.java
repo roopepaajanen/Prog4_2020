@@ -1,7 +1,7 @@
 public class insertCharacterCommand extends command {
     //members..
 
-    public InsertCharacterCommand()
+    public insertCharacterCommand()
     {
         //instantiate
     }
