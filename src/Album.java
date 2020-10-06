@@ -61,7 +61,4 @@ public class Album {
         desiredAlbumSoundClips.remove(clipToBeRemoved);
     }
 
-    public boolean containsClip(SoundClip clip){
-        return desiredAlbumSoundClips.contains(clip);
-    }
 }

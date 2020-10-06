@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 
 public class MusicOrganizerController {
 
@@ -7,6 +8,8 @@ public class MusicOrganizerController {
 	private SoundClipBlockingQueue queue;
 	private Album root;
 	private int albumAmount = 0;
+	private Stack<Object> undoStack = new Stack<Object>();
+	private Stack<Object> redoStack = new Stack<Object>();
 
 	public MusicOrganizerController() {
 
@@ -117,4 +120,50 @@ public class MusicOrganizerController {
 		for(int i=0;i<l.size();i++)
 			queue.enqueue(l.get(i));
 	}
+
+	private int undoRedoPointer = -1;
+	private Stack<command> commandStack = new Stack<>();
+
+	private void insertCommand(){
+		deletElementsAfterPointer(undoRedoPointer);
+		command command = new command();
+		command.execute();
+		commandStack.push(command);
+		undoRedoPointer++;
+	}
+
+	private void deletElementsAfterPointer(int undoRedoPointer) {
+
+		if(commandStack.size()<1) {
+			return;
+		}
+
+		for(int i = commandStack.size() - 1; i > undoRedoPointer; i--){
+			commandStack.remove(i);
+		}
+	}
+
+	private void undo(){
+		command command = commandStack.get(undoRedoPointer);
+		command.unExecute();
+		undoRedoPointer--;
+	}
+
+	private void redo(){
+		if (undoRedoPointer == commandStack.size() - 1){
+			return;
+		}
+		undoRedoPointer++;
+		command command = commandStack.get(undoRedoPointer);
+		command.execute();
+	}
+
+	/*public void pushToStack(Stack <Object> stack, Object i){
+		stack.push(i);
+
+	}
+
+	public void popFromStack(Stack <Object> stack, Object i){
+		stack.pop(i);
+	}*/
 }
