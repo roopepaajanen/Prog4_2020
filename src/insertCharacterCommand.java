@@ -1,5 +1,4 @@
-public class insertCharacterCommand extends command
-{
+public class insertCharacterCommand extends command {
     //members..
 
     public InsertCharacterCommand()
@@ -9,6 +8,8 @@ public class insertCharacterCommand extends command
 
     @Override public void execute()
     {
+        Moment moment = new Moment();
+
         //create Memento before executing
         //set new state
     }

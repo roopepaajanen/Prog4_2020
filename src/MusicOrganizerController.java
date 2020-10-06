@@ -143,13 +143,13 @@ public class MusicOrganizerController {
 		}
 	}
 
-	private void undo(){
+	public void undo(){
 		command command = commandStack.get(undoRedoPointer);
 		command.unExecute();
 		undoRedoPointer--;
 	}
 
-	private void redo(){
+	public void redo(){
 		if (undoRedoPointer == commandStack.size() - 1){
 			return;
 		}
@@ -157,13 +157,4 @@ public class MusicOrganizerController {
 		command command = commandStack.get(undoRedoPointer);
 		command.execute();
 	}
-
-	/*public void pushToStack(Stack <Object> stack, Object i){
-		stack.push(i);
-
-	}
-
-	public void popFromStack(Stack <Object> stack, Object i){
-		stack.pop(i);
-	}*/
 }
