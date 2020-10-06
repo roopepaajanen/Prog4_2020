@@ -5,7 +5,7 @@ import java.util.List;
 //class to create album objects.
 public class Album {
     private String albumName; //name of the album
-    public List<SoundClip> desiredAlbumSoundClips; //List of sound clips
+    private List<SoundClip> desiredAlbumSoundClips; //List of sound clips
     private List<Album> subAlbumList; //List of sub albums for every parent album
     private Album parentAlbum;
 
