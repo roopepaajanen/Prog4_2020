@@ -2,10 +2,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JToolBar;
+import javax.swing.*;
 
 public class MusicOrganizerButtonPanel extends JPanel {
 
@@ -73,7 +70,8 @@ public class MusicOrganizerButtonPanel extends JPanel {
 	
 	private JButton createNewAlbumButton() {
 		ImageIcon newAlbumIcon = new ImageIcon("icons/folder_add_32.png");
-		JButton newAlbumButton = new JButton("New Album");
+		//JButton newAlbumButton = new JButton("New Album");
+		JButton newAlbumButton = new JButton(newAlbumIcon);
 		newAlbumButton.setToolTipText("New Album");
 		newAlbumButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -85,7 +83,8 @@ public class MusicOrganizerButtonPanel extends JPanel {
 	
 	private JButton createDeleteAlbumButton() {
 		ImageIcon deleteAlbumIcon = new ImageIcon("icons/folder_delete_32.png");
-		JButton deleteAlbumButton = new JButton("Remove Album");
+		//JButton deleteAlbumButton = new JButton("Remove Album");
+		JButton deleteAlbumButton = new JButton(deleteAlbumIcon);
 		deleteAlbumButton.setToolTipText("Delete Selected Album");
 		deleteAlbumButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -97,20 +96,19 @@ public class MusicOrganizerButtonPanel extends JPanel {
 
 	private JButton createAddSoundClipsButton() {
 		ImageIcon addSoundClipsIcon = new ImageIcon("icons/document_add_32.png");
-		JButton addSoundClipButton = new JButton("Add Sound Clips");
+		//JButton addSoundClipButton = new JButton("Add Sound Clips");
+		JButton addSoundClipButton = new JButton(addSoundClipsIcon);
 		addSoundClipButton.setToolTipText("Add Selected Sound Clips To Selected Album");
 		addSoundClipButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {	
-				controller.addSoundClips();
-
-			}
+			public void actionPerformed(ActionEvent e) { controller.addSoundClips(); }
 		});
 		return addSoundClipButton;
 	}
 	
 	private JButton createRemoveSoundClipsButton() {
 		ImageIcon removeSoundClipsIcon = new ImageIcon("icons/document_delete_32.png");
-		JButton removeSoundClipsButton = new JButton("Remove Sound Clips");
+		//JButton removeSoundClipsButton = new JButton("Remove Sound Clips");
+		JButton removeSoundClipsButton = new JButton(removeSoundClipsIcon);
 		removeSoundClipsButton.setToolTipText("Remove Selected Sound Clips From Selected Album");
 		removeSoundClipsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -122,36 +120,33 @@ public class MusicOrganizerButtonPanel extends JPanel {
 	
 	private JButton createPlayButton() {
 		ImageIcon playIcon = new ImageIcon("icons/play_32.png");
-		JButton playButton = new JButton("Play");
+		//JButton playButton = new JButton("Play");
+		JButton playButton = new JButton(playIcon);
 		playButton.setToolTipText("Play Selected Sound Clip");
 		playButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				controller.playSoundClips();
-			}
+			public void actionPerformed(ActionEvent e) { controller.playSoundClips(); }
 		});
 		return playButton;
 	}
 
 	private JButton createUndoButton(){
-		ImageIcon undoIcon = new ImageIcon("Actions-blue-arrow-undo-icon.png");
-		JButton undoButton = new JButton("Undo");
-
+		ImageIcon undoIcon = new ImageIcon("icons/Actions-blue-arrow-undo-icon.png");
+		//JButton undoButton = new JButton("Undo");
+		JButton undoButton = new JButton(undoIcon);
+		undoButton.setToolTipText("Undo Previous Action");
 		undoButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
+			public void actionPerformed(ActionEvent e) { /*controller.undo(); */}
 		});
 		return undoButton;
 	}
 
 	private JButton createRedoButton(){
-		ImageIcon redoIcon = new ImageIcon("Actions-blue-arrow-redo-icon.png");
-		JButton redoButton = new JButton("Redo");
-
+		ImageIcon redoIcon = new ImageIcon("icons/Actions-blue-arrow-redo-icon.png");
+		//JButton redoButton = new JButton("Redo");
+		JButton redoButton = new JButton(redoIcon);
+		redoButton.setToolTipText("Redo Previous Action");
 		redoButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
+			public void actionPerformed(ActionEvent e) { /*controller.redo(); */}
 		});
 		return redoButton;
 	}

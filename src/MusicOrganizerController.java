@@ -125,14 +125,14 @@ public class MusicOrganizerController {
 	private Stack<command> commandStack = new Stack<>();
 
 	private void insertCommand(){
-		deletElementsAfterPointer(undoRedoPointer);
+		/*deletElementsAfterPointer(undoRedoPointer);
 		command command = new command();
 		command.execute();
 		commandStack.push(command);
-		undoRedoPointer++;
+		undoRedoPointer++;*/
 	}
 
-	private void deletElementsAfterPointer(int undoRedoPointer) {
+	private void deleteElementsAfterPointer(int undoRedoPointer) {
 
 		if(commandStack.size()<1) {
 			return;
@@ -143,13 +143,13 @@ public class MusicOrganizerController {
 		}
 	}
 
-	private void undo(){
+	public void undo(){
 		command command = commandStack.get(undoRedoPointer);
 		command.unExecute();
 		undoRedoPointer--;
 	}
 
-	private void redo(){
+	public void redo(){
 		if (undoRedoPointer == commandStack.size() - 1){
 			return;
 		}
