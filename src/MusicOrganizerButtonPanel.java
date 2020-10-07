@@ -8,6 +8,7 @@ public class MusicOrganizerButtonPanel extends JPanel {
 
 	private MusicOrganizerController controller;
 	private MusicOrganizerWindow view;
+	CommandManager command;
 	
 	private JButton newAlbumButton;
 	private JButton deleteAlbumButton;
@@ -129,6 +130,7 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		return playButton;
 	}
 
+
 	private JButton createUndoButton(){
 		ImageIcon undoIcon = new ImageIcon("icons/Actions-blue-arrow-undo-icon.png");
 		//JButton undoButton = new JButton("Undo");
@@ -136,9 +138,14 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		undoButton.setToolTipText("Undo Previous Action");
 		undoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.insertCommand();
-				controller.undo(); }
+				command.undo(); }
 		});
+		if(!command.isUndoAvailable()){
+			undoButton.setEnabled(false);
+		}
+		else{
+			undoButton.setEnabled(true);
+		}
 		return undoButton;
 	}
 
@@ -149,9 +156,16 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		redoButton.setToolTipText("Redo Previous Action");
 		redoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.insertCommand();
-				controller.redo(); }
+
+				command.redo(); }
 		});
+		if(!command.isRedoAvailable()){
+			redoButton.setEnabled(false);
+		}
+		else{
+			redoButton.setEnabled(true);
+		}
+
 		return redoButton;
 	}
 

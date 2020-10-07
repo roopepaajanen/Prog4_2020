@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 
@@ -41,14 +42,14 @@ public class MusicOrganizerController {
 	/**
 	 * Returns the root album
 	 */
-	public Album getRootAlbum(){
+	public Album getRootAlbum() {
 		return root;
 	}
 
 	/**
 	 * Adds an album to the Music Organizer
 	 */
-	public void addNewAlbum() throws NullPointerException{
+	public void addNewAlbum() throws NullPointerException {
 		// TODO: Add your code here
 		try {
 			String newAlbumName = view.promptForAlbumName();
@@ -56,8 +57,7 @@ public class MusicOrganizerController {
 			Album newAlbum = new Album(newAlbumName, parentAlbum);
 			view.onAlbumAdded(newAlbum);
 			albumAmount++;
-		}
-		catch (NullPointerException e){
+		} catch (NullPointerException e) {
 			view.showMessage("Select an album first!");
 		}
 	}
@@ -65,7 +65,7 @@ public class MusicOrganizerController {
 	/**
 	 * Removes an album from the Music Organizer
 	 */
-	public void deleteAlbum() throws NullPointerException{
+	public void deleteAlbum() throws NullPointerException {
 		//TODO: Add your code here
 		try {
 			Album deleteAlbum = view.getSelectedAlbum();
@@ -73,11 +73,10 @@ public class MusicOrganizerController {
 				view.onAlbumRemoved(deleteAlbum);
 				albumAmount--;
 			}
-			if(deleteAlbum == root){
+			if (deleteAlbum == root) {
 				view.showMessage("You can't delete the root album :(");
 			}
-		}
-		catch (NullPointerException e){
+		} catch (NullPointerException e) {
 			view.showMessage("Select an album first!");
 		}
 	}
@@ -85,15 +84,14 @@ public class MusicOrganizerController {
 	/**
 	 * Adds sound clips to an album
 	 */
-	public void addSoundClips() throws NullPointerException{
+	public void addSoundClips() throws NullPointerException {
 		// TODO: Add your code here
 		try {
-			for (SoundClip clip : view.getSelectedSoundClips()){
+			for (SoundClip clip : view.getSelectedSoundClips()) {
 				view.getSelectedAlbum().addSoundClip(clip);
 			}
 			view.onClipsUpdated();
-		}
-		catch (NullPointerException e){
+		} catch (NullPointerException e) {
 			view.showMessage("Select an album first!");
 		}
 	}
@@ -101,7 +99,7 @@ public class MusicOrganizerController {
 	/**
 	 * Removes sound clips from an album
 	 */
-	public void removeSoundClips(){
+	public void removeSoundClips() {
 		// TODO: Add your code here
 		for (SoundClip clip : view.getSelectedSoundClips()) {
 			view.getSelectedAlbum().removeSoundClip(clip);
@@ -115,13 +113,13 @@ public class MusicOrganizerController {
 	 * this method is called, the selected sound clips in the
 	 * SoundClipTable are played.
 	 */
-	public void playSoundClips(){
+	public void playSoundClips() {
 		List<SoundClip> l = view.getSelectedSoundClips();
-		for(int i=0;i<l.size();i++)
+		for (int i = 0; i < l.size(); i++)
 			queue.enqueue(l.get(i));
 	}
-
-	private int undoRedoPointer = -1;
+}
+/*	private int undoRedoPointer = -1;
 	private Stack<command> commandStack = new Stack<>();
 
 	public void insertCommand(){
@@ -156,5 +154,4 @@ public class MusicOrganizerController {
 		undoRedoPointer++;
 		command command = commandStack.get(undoRedoPointer);
 		command.execute();
-	}
-}
+	}                     */
