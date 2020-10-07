@@ -4,7 +4,7 @@ public class MainApplication {
 
 	/**
 	 * Main entry point of music organizer.
-	 * @param args - the command line arguments. If specified, it should contain the path to 
+	 * @param args - the Command line arguments. If specified, it should contain the path to
 	 * the folder where to find the desired WAV files to use in the application.
 	 */
 	public static void main(String[] args) {
@@ -18,7 +18,7 @@ public class MainApplication {
 				} else if (args.length == 1) {
 					controller.loadSoundClips(args[0]);
 				} else {
-					System.err.println("too many command-line arguments");
+					System.err.println("too many Command-line arguments");
 					System.exit(0);
 				}
 			

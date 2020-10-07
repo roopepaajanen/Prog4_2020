@@ -1,4 +1,6 @@
+
 public interface Command {
-    public void execute();
-    public void undo();
+    Container execute();
+    void undo(Container container);
+    void redo(Container container);
 }

@@ -1,41 +1,48 @@
+import javax.swing.plaf.nimbus.State;
 import java.util.Stack;
 
 public class CommandManager {
-
-    private Stack<Command> undos = new Stack<Command>();
-    private Stack<Command> redos = new Stack<Command>();
     private Command lastCommand;
+    private Stack<Command> undoStack = new Stack<>();
+    private Stack<Command> redoStack = new Stack<>();
+    private Stack<Container> undoContainerStack = new Stack<>();
+    private Stack<Container> redoContainerStack = new Stack<>();
+    private Container lastContainer;
+    private MusicOrganizerWindow view2;
 
-
-    public void executeCommand(Command c){
-        c.execute();
-        undos.push(c);
-        redos.clear();
-    }
-    public CommandManager(){
-
-    }
-
-
-    public boolean isUndoAvailable(){
-        return  !undos.empty();
+    public CommandManager(MusicOrganizerWindow view) {
+        view2 = view;
     }
 
-    public void undo(){
-        assert(lastCommand != null);
-         lastCommand.undo();
-         lastCommand = null;
-
+    public Stack<Command> getUndoStack(){
+        return undoStack;
     }
 
-    public boolean isRedoAvailable(){
-        return  !redos.empty();
+    public Stack<Command> getRedoStack(){
+        return redoStack;
+    }
+
+    public void executeCommand(Command com) {
+        lastContainer = com.execute();
+        undoStack.push(com); //add....
+        lastCommand = com;
+        undoContainerStack.push(lastContainer);
+    }
+
+    public void undo() {
+        lastCommand.undo(lastContainer);
+        redoStack.push(lastCommand);
+        redoContainerStack.push(lastContainer);
+        lastCommand = undoStack.pop();
+        lastContainer = undoContainerStack.pop();
     }
 
     public void redo(){
-        assert (!redos.empty());
-         Command command = redos.pop();
-         command.execute();
-         undos.push(command);
+        undoStack.push(lastCommand);
+        undoContainerStack.push(lastContainer);
+        lastCommand = redoStack.pop();
+        lastContainer = redoContainerStack.pop();
+        lastCommand.redo(lastContainer);
     }
+
 }
