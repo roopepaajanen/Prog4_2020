@@ -8,9 +8,9 @@ public class Moment {
         return tree;
     }
 
-    public void setState(JTree myObject)
+    public void setState(JTree tree)
     {
-        this.tree = myObject;
+        this.tree = tree;
     }
 
 }
