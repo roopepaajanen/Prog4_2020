@@ -29,8 +29,8 @@ public class Album {
     }
 
     //gets the sound clips from the desired album and returns them as a list.
-    public List<SoundClip> getSoundClipsFromAlbum(Album desiredAlbum) {
-        return desiredAlbum.desiredAlbumSoundClips;
+    public List<SoundClip> getSoundClipsFromAlbum() {
+        return desiredAlbumSoundClips;
     }
 
     //checks if a sound clip is present in an album's list of sound clips.

@@ -72,9 +72,9 @@ class AlbumTest {
         rootAlbum.addSoundClip(clip2);
         rootAlbum.addSoundClip(clip3);
 
-        assertTrue(rootAlbum.getSoundClipsFromAlbum(rootAlbum).contains(clip1));
-        assertTrue(rootAlbum.getSoundClipsFromAlbum(rootAlbum).contains(clip2));
-        assertTrue(rootAlbum.getSoundClipsFromAlbum(rootAlbum).contains(clip3));
+        assertTrue(rootAlbum.getSoundClipsFromAlbum().contains(clip1));
+        assertTrue(rootAlbum.getSoundClipsFromAlbum().contains(clip2));
+        assertTrue(rootAlbum.getSoundClipsFromAlbum().contains(clip3));
 
     }
 }
