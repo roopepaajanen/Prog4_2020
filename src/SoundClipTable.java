@@ -24,7 +24,7 @@ public class SoundClipTable extends JList {
 
 		// TODO: Add all sound clips found in 'a'
 		// to the instance variable 'clips'.
-		clips.addAll(a.getSoundClipsFromAlbum(a));
+		clips.addAll(a.getSoundClipsFromAlbum());
 
 		Object[] data = new Object[clips.size()];
 		Iterator<SoundClip> it = clips.iterator();

@@ -1,6 +1,5 @@
 import java.util.List;
 import java.util.Set;
-import java.util.Stack;
 
 public class MusicOrganizerController {
 
@@ -8,8 +7,7 @@ public class MusicOrganizerController {
 	private SoundClipBlockingQueue queue;
 	private Album root;
 	private int albumAmount = 0;
-	private Stack<Object> undoStack = new Stack<Object>();
-	private Stack<Object> redoStack = new Stack<Object>();
+	CommandManager commandManager;
 
 	public MusicOrganizerController() {
 
@@ -18,6 +16,9 @@ public class MusicOrganizerController {
 
 		// Create the View in Model-View-Controller
 		view = new MusicOrganizerWindow(this);
+
+		//någå fin comment
+		commandManager = new CommandManager(view);
 
 		// Create the blocking queue
 		queue = new SoundClipBlockingQueue();
@@ -48,17 +49,42 @@ public class MusicOrganizerController {
 	/**
 	 * Adds an album to the Music Organizer
 	 */
-	public void addNewAlbum() throws NullPointerException{
+	public Album addNewAlbum() throws NullPointerException{
 		// TODO: Add your code here
+		Album newAlbum = null;
 		try {
 			String newAlbumName = view.promptForAlbumName();
 			Album parentAlbum = view.getSelectedAlbum();
-			Album newAlbum = new Album(newAlbumName, parentAlbum);
+			 newAlbum = new Album(newAlbumName, parentAlbum);
 			view.onAlbumAdded(newAlbum);
 			albumAmount++;
+			return newAlbum;
 		}
 		catch (NullPointerException e){
 			view.showMessage("Select an album first!");
+		}
+		return newAlbum;
+	}
+
+	public void newAlbumCommandCommunicator(){
+		addAlbumCommand command = new addAlbumCommand();
+		commandManager.executeCommand(command);
+	}
+
+	private class addAlbumCommand implements Command{
+		@Override
+		public Container execute(){
+			return new Container(addNewAlbum(), null);
+		}
+
+		@Override
+		public void undo(Container album){
+			view.onAlbumRemoved(album.getAlbumATM());
+		}
+
+		@Override
+		public void redo(Container container) {
+			view.onAlbumAdded(container.getAlbumATM());
 		}
 	}
 
@@ -82,6 +108,30 @@ public class MusicOrganizerController {
 		}
 	}
 
+	public void deleteAlbumCommandCommunicator(){
+		deleteAlbumCommand command = new deleteAlbumCommand();
+		commandManager.executeCommand(command);
+	}
+
+	private class deleteAlbumCommand implements Command{
+		@Override
+		public Container execute(){
+			Container deleteAlbum = new Container(view.getSelectedAlbum(),null);
+			deleteAlbum();
+			return deleteAlbum;
+		}
+
+		@Override
+		public void undo(Container album){
+			view.onAlbumAdded(album.getAlbumATM());
+		}
+
+		@Override
+		public void redo(Container container) {
+			view.onAlbumRemoved(container.getAlbumATM());
+		}
+	}
+
 	/**
 	 * Adds sound clips to an album
 	 */
@@ -98,6 +148,36 @@ public class MusicOrganizerController {
 		}
 	}
 
+	public void addSoundClipsCommandCommunicator(){
+		addSoundClipsCommand command = new addSoundClipsCommand();
+		commandManager.executeCommand(command);
+	}
+
+	private class addSoundClipsCommand implements Command{
+		@Override
+		public Container execute(){
+			Container addSoundClip = new Container(view.getSelectedAlbum(),view.getSelectedSoundClips());
+			addSoundClips();
+			return addSoundClip;
+		}
+
+		@Override
+		public void undo(Container clips){
+			Album temp = clips.getAlbumATM();
+			for (SoundClip soundClip: clips.getAlbumATMSoundClips()) {
+				temp.removeSoundClip(soundClip);
+			}
+		}
+
+		@Override
+		public void redo(Container clips) {
+			Album temp = clips.getAlbumATM();
+			for (SoundClip soundClip: clips.getAlbumATMSoundClips()) {
+				temp.addSoundClip(soundClip);
+			}
+		}
+	}
+
 	/**
 	 * Removes sound clips from an album
 	 */
@@ -107,6 +187,36 @@ public class MusicOrganizerController {
 			view.getSelectedAlbum().removeSoundClip(clip);
 		}
 		view.onClipsUpdated();
+	}
+
+	public void removeSoundClipsCommandCommunicator(){
+		removeSoundClipsCommand command = new removeSoundClipsCommand();
+		commandManager.executeCommand(command);
+	}
+
+	private class removeSoundClipsCommand implements Command{
+		@Override
+		public Container execute(){
+			Container removeSoundClip = new Container(view.getSelectedAlbum(),view.getSelectedSoundClips());
+			removeSoundClips();
+			return removeSoundClip;
+		}
+
+		@Override
+		public void undo(Container clips){
+			Album temp = clips.getAlbumATM();
+			for (SoundClip soundClips: clips.getAlbumATMSoundClips()) {
+				temp.addSoundClip(soundClips);
+			}
+		}
+
+		@Override
+		public void redo(Container clips) {
+			Album temp = clips.getAlbumATM();
+			for (SoundClip soundClip: clips.getAlbumATMSoundClips()) {
+				temp.removeSoundClip(soundClip);
+			}
+		}
 	}
 
 	/**
@@ -121,49 +231,23 @@ public class MusicOrganizerController {
 			queue.enqueue(l.get(i));
 	}
 
-	private int undoRedoPointer = -1;
-	private Stack<command> commandStack = new Stack<>();
-
-	private void insertCommand(){
-		/*deletElementsAfterPointer(undoRedoPointer);
-		command command = new command();
-		command.execute();
-		commandStack.push(command);
-		undoRedoPointer++;*/
+	public boolean isRedoAvailable(){
+		return !commandManager.getRedoStack().empty();
 	}
 
-	private void deleteElementsAfterPointer(int undoRedoPointer) {
+	public boolean isUndoAvailable(){
+		return !commandManager.getUndoStack().empty();
+	}
 
-		if(commandStack.size()<1) {
-			return;
-		}
-
-		for(int i = commandStack.size() - 1; i > undoRedoPointer; i--){
-			commandStack.remove(i);
-		}
+	public void isButtonAvailable(){
+		view.sendButtonPossibility(isUndoAvailable(),isRedoAvailable());
 	}
 
 	public void undo(){
-		command command = commandStack.get(undoRedoPointer);
-		command.unExecute();
-		undoRedoPointer--;
+		commandManager.undo();
 	}
 
 	public void redo(){
-		if (undoRedoPointer == commandStack.size() - 1){
-			return;
-		}
-		undoRedoPointer++;
-		command command = commandStack.get(undoRedoPointer);
-		command.execute();
+		commandManager.redo();
 	}
-
-	/*public void pushToStack(Stack <Object> stack, Object i){
-		stack.push(i);
-
-	}
-
-	public void popFromStack(Stack <Object> stack, Object i){
-		stack.pop(i);
-	}*/
 }

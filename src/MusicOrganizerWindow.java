@@ -254,4 +254,8 @@ public class MusicOrganizerWindow extends JFrame {
 		Album a = (Album) getSelectedTreeNode().getUserObject();
 		clipTable.display(a);
 	}
+
+	public void sendButtonPossibility(Boolean undoPossible, Boolean redoPossible){
+		buttonPanel.checkButtonPossibility(undoPossible,redoPossible);
+	}
 }
