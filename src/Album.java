@@ -43,6 +43,13 @@ public class Album {
         return albumName;
     }
 
+    //recursive method to add a list of sound clips using the addSoundClip method that adds them individually.
+    public void addSoundClips(List<SoundClip> clipsToAdd) {
+        for(SoundClip s : clipsToAdd) {
+            this.addSoundClip(s);
+        }
+    }
+
     //adds the desired sound clip to the desired album's sound clip list
     public void addSoundClip(SoundClip clip) {
         if(parentAlbum != null && !parentAlbum.desiredAlbumSoundClips.contains(clip)) {
@@ -53,12 +60,17 @@ public class Album {
         }
     }
 
-    //removes sound clip from specified Album recursively
-    public void removeSoundClip(SoundClip clipToBeRemoved) {
-        for (Album album : subAlbumList) {
-            album.removeSoundClip(clipToBeRemoved);
+    //recursive method to remove a list of sound clips using the removeSoundClip method that removes them individually.
+    public void removeSoundClips(List<SoundClip> clipsToRemove) {
+        for(SoundClip s : clipsToRemove) {
+            this.removeSoundClip(s);
         }
-        desiredAlbumSoundClips.remove(clipToBeRemoved);
     }
-
+    //removes sound clip from specified Album recursively
+    public void removeSoundClip(SoundClip clip) {
+        for (Album album : subAlbumList) {
+            album.removeSoundClip(clip);
+        }
+        desiredAlbumSoundClips.remove(clip);
+    }
 }

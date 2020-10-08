@@ -17,8 +17,8 @@ public class MusicOrganizerController {
 		// Create the View in Model-View-Controller
 		view = new MusicOrganizerWindow(this);
 
-		//någå fin comment
-		commandManager = new CommandManager(view);
+		//A very descriptive comment XD...
+		commandManager = new CommandManager();
 
 		// Create the blocking queue
 		queue = new SoundClipBlockingQueue();
@@ -34,6 +34,7 @@ public class MusicOrganizerController {
 	public Set<SoundClip> loadSoundClips(String path) {
 		Set<SoundClip> clips = SoundClipLoader.loadSoundClips(path);
 		// TODO: Add the loaded sound clips to the root album
+		//List<SoundClip> theClips = root.getSoundClipsFromAlbum();
 		root.getSoundClipsFromAlbum().addAll(clips);
 		System.out.println(root.getSoundClipsFromAlbum());
 		return clips;
@@ -66,22 +67,32 @@ public class MusicOrganizerController {
 		return newAlbum;
 	}
 
+	/**
+	 * The respective button calls this method to then communicate between their respective Command method and the
+	 * method that does the actual functionality
+	 */
 	public void newAlbumCommandCommunicator(){
 		addAlbumCommand command = new addAlbumCommand();
 		commandManager.executeCommand(command);
 	}
 
+	/**
+	 * Implements the Command interface to perform either its normal execution, or to either undo or redo.
+	 */
 	private class addAlbumCommand implements Command{
+		/**	Performs the normal execution */
 		@Override
 		public Container execute(){
 			return new Container(addNewAlbum(), null);
 		}
 
+		/**	Performs the undo functionality */
 		@Override
 		public void undo(Container album){
 			view.onAlbumRemoved(album.getAlbumATM());
 		}
 
+		/**	Performs the redo functionality */
 		@Override
 		public void redo(Container container) {
 			view.onAlbumAdded(container.getAlbumATM());
@@ -108,12 +119,20 @@ public class MusicOrganizerController {
 		}
 	}
 
+	/**
+	 * The respective button calls this method to then communicate between their respective Command method and the
+	 * method that does the actual functionality
+	 */
 	public void deleteAlbumCommandCommunicator(){
 		deleteAlbumCommand command = new deleteAlbumCommand();
 		commandManager.executeCommand(command);
 	}
 
+	/**
+	 * Implements the Command interface to perform either its normal execution, or to either undo or redo.
+	 */
 	private class deleteAlbumCommand implements Command{
+		/**	Performs the normal execution */
 		@Override
 		public Container execute(){
 			Container deleteAlbum = new Container(view.getSelectedAlbum(),null);
@@ -121,11 +140,13 @@ public class MusicOrganizerController {
 			return deleteAlbum;
 		}
 
+		/**	Performs the undo functionality */
 		@Override
 		public void undo(Container album){
 			view.onAlbumAdded(album.getAlbumATM());
 		}
 
+		/**	Performs the redo functionality */
 		@Override
 		public void redo(Container container) {
 			view.onAlbumRemoved(container.getAlbumATM());
@@ -138,9 +159,7 @@ public class MusicOrganizerController {
 	public void addSoundClips() throws NullPointerException{
 		// TODO: Add your code here
 		try {
-			for (SoundClip clip : view.getSelectedSoundClips()){
-				view.getSelectedAlbum().addSoundClip(clip);
-			}
+			view.getSelectedAlbum().addSoundClips(view.getSelectedSoundClips());
 			view.onClipsUpdated();
 		}
 		catch (NullPointerException e){
@@ -148,12 +167,20 @@ public class MusicOrganizerController {
 		}
 	}
 
+	/**
+	 * The respective button calls this method to then communicate between their respective Command method and the
+	 * method that does the actual functionality
+	 */
 	public void addSoundClipsCommandCommunicator(){
 		addSoundClipsCommand command = new addSoundClipsCommand();
 		commandManager.executeCommand(command);
 	}
 
+	/**
+	 * Implements the Command interface to perform either its normal execution, or to either undo or redo.
+	 */
 	private class addSoundClipsCommand implements Command{
+		/**	Performs the normal execution */
 		@Override
 		public Container execute(){
 			Container addSoundClip = new Container(view.getSelectedAlbum(),view.getSelectedSoundClips());
@@ -161,6 +188,7 @@ public class MusicOrganizerController {
 			return addSoundClip;
 		}
 
+		/**	Performs the undo functionality */
 		@Override
 		public void undo(Container clips){
 			Album temp = clips.getAlbumATM();
@@ -169,6 +197,7 @@ public class MusicOrganizerController {
 			}
 		}
 
+		/**	Performs the redo functionality */
 		@Override
 		public void redo(Container clips) {
 			Album temp = clips.getAlbumATM();
@@ -183,18 +212,24 @@ public class MusicOrganizerController {
 	 */
 	public void removeSoundClips(){
 		// TODO: Add your code here
-		for (SoundClip clip : view.getSelectedSoundClips()) {
-			view.getSelectedAlbum().removeSoundClip(clip);
-		}
+		view.getSelectedAlbum().removeSoundClips(view.getSelectedSoundClips());
 		view.onClipsUpdated();
 	}
 
+	/**
+	 * The respective button calls this method to then communicate between their respective Command method and the
+	 * method that does the actual functionality
+	 */
 	public void removeSoundClipsCommandCommunicator(){
 		removeSoundClipsCommand command = new removeSoundClipsCommand();
 		commandManager.executeCommand(command);
 	}
 
+	/**
+	 * Implements the Command interface to perform either its normal execution, or to either undo or redo.
+	 */
 	private class removeSoundClipsCommand implements Command{
+		/**	Performs the normal execution */
 		@Override
 		public Container execute(){
 			Container removeSoundClip = new Container(view.getSelectedAlbum(),view.getSelectedSoundClips());
@@ -202,6 +237,7 @@ public class MusicOrganizerController {
 			return removeSoundClip;
 		}
 
+		/**	Performs the undo functionality */
 		@Override
 		public void undo(Container clips){
 			Album temp = clips.getAlbumATM();
@@ -210,6 +246,7 @@ public class MusicOrganizerController {
 			}
 		}
 
+		/**	Performs the redo functionality */
 		@Override
 		public void redo(Container clips) {
 			Album temp = clips.getAlbumATM();
@@ -231,22 +268,27 @@ public class MusicOrganizerController {
 			queue.enqueue(l.get(i));
 	}
 
+	/**	Checks if the redo stack is empty or not */
 	public boolean isRedoAvailable(){
 		return !commandManager.getRedoStack().empty();
 	}
 
+	/**	Checks if the undo stack is empty or not */
 	public boolean isUndoAvailable(){
 		return !commandManager.getUndoStack().empty();
 	}
 
+	/**	Sends the status from the undo and redo stacks checks forward to MusicOrganizerWindow*/
 	public void isButtonAvailable(){
-		view.sendButtonPossibility(isUndoAvailable(),isRedoAvailable());
+		view.sendButtonAvailability(isUndoAvailable(), isRedoAvailable());
 	}
 
+	/**	Invokes the undo functionality in the CommandManager class */
 	public void undo(){
 		commandManager.undo();
 	}
 
+	/**	Invokes the redo functionality in the CommandManager class */
 	public void redo(){
 		commandManager.redo();
 	}

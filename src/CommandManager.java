@@ -1,6 +1,10 @@
 import javax.swing.plaf.nimbus.State;
 import java.util.Stack;
 
+/**Class that manages the Commands and Containers given that changes the undo and redo stacks respectively.
+ *
+ */
+
 public class CommandManager {
     private Command lastCommand;
     private Stack<Command> undoStack = new Stack<>();
@@ -8,11 +12,10 @@ public class CommandManager {
     private Stack<Container> undoContainerStack = new Stack<>();
     private Stack<Container> redoContainerStack = new Stack<>();
     private Container lastContainer;
-    private MusicOrganizerWindow view2;
+    //private MusicOrganizerWindow view2;
 
-
-    public CommandManager(MusicOrganizerWindow view) {
-        view2 = view;
+    public CommandManager(/*MusicOrganizerWindow view*/) {
+        //view2 = view;
     }
 
     public Stack<Command> getUndoStack(){

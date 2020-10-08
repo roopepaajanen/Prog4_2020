@@ -167,7 +167,8 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		return redoButton;
 	}
 
-	public void checkButtonPossibility(Boolean undoPossible, Boolean redoPossible){
+	/**	Changes the state of the undo and redo buttons */
+	public void enableDisableButton(Boolean undoPossible, Boolean redoPossible){
 		undoButton.setEnabled(undoPossible);
 		redoButton.setEnabled(redoPossible);
 	}
