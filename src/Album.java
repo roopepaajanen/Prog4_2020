@@ -66,6 +66,7 @@ public class Album {
             this.removeSoundClip(s);
         }
     }
+
     //removes sound clip from specified Album recursively
     public void removeSoundClip(SoundClip clip) {
         for (Album album : subAlbumList) {
