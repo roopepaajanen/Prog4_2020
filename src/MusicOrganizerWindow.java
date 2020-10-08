@@ -255,7 +255,8 @@ public class MusicOrganizerWindow extends JFrame {
 		clipTable.display(a);
 	}
 
-	public void sendButtonPossibility(Boolean undoPossible, Boolean redoPossible){
-		buttonPanel.checkButtonPossibility(undoPossible,redoPossible);
+	/**	Sends the availability of the undo and redo buttons to the Button Panel class to activate or deactivate */
+	public void sendButtonAvailability(Boolean undoPossible, Boolean redoPossible){
+		buttonPanel.enableDisableButton(undoPossible,redoPossible);
 	}
 }
