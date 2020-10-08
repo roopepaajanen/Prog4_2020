@@ -10,6 +10,7 @@ public class CommandManager {
     private Container lastContainer;
     private MusicOrganizerWindow view2;
 
+
     public CommandManager(MusicOrganizerWindow view) {
         view2 = view;
     }
