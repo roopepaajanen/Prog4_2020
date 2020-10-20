@@ -151,8 +151,8 @@ public class MusicOrganizerWindow extends JFrame {
 				null,
 				"");
 	}
-	public List<SoundClip> returnRatedSong(){
-		return getSelectedSoundClips();
+	public SoundClip returnRatedSong(){
+		return (SoundClip) getSelectedSoundClips();
 	}
 
 	/**Creates a pop up window showing a message

@@ -65,10 +65,6 @@ public class MusicOrganizerController {
 		return flag;
 	}
 
-	public Album getRateAlbum(){return rate;}
-
-	public Album getFlagAlbum(){return flag;}
-
 	//----------------------------------------------------------------------------------------------------------------
 	/**
 	 * Adds an album to the Music Organizer
@@ -79,7 +75,7 @@ public class MusicOrganizerController {
 		try {
 			String newAlbumName = view.promptForAlbumName();
 			Album parentAlbum = view.getSelectedAlbum();
-			 newAlbum = new Album(newAlbumName, parentAlbum);
+			newAlbum = new Album(newAlbumName, parentAlbum);
 			view.onAlbumAdded(newAlbum);
 			return newAlbum;
 		}

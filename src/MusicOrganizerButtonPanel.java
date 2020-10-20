@@ -8,7 +8,6 @@ public class MusicOrganizerButtonPanel extends JPanel {
 
 	private MusicOrganizerController controller;
 	private MusicOrganizerWindow view;
-	private Album album;
 	
 	private JButton newAlbumButton;
 	private JButton deleteAlbumButton;
@@ -196,10 +195,18 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		rateButton.setToolTipText("Rate your song");
 		rateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SoundClip ratedSong = (SoundClip) view.returnRatedSong();
+				//SoundClip ratedSong = (SoundClip) view.returnRatedSong();
+				
 				int rate = Integer.parseInt(view.popUpRate());
-				if(rate>3){
-					controller.getRateAlbum().addSoundClip(ratedSong);
+				try {
+					if (rate == 4 || rate == 5) {
+						controller.getRateAlbum().addSoundClip(ratedSong);
+						//add nummber to song
+					} else if (rate >= 0 && rate < 4) {
+						//add nummber to song
+					}
+				}catch (Exception f){
+					view.showMessage("E du dumm eller väfään, mannen?" + f);
 				}
 			}
 		});
