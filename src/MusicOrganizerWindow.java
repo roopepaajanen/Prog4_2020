@@ -89,8 +89,7 @@ public class MusicOrganizerWindow extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				// if left-double-click @@@changed =2 to ==1
 				if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2){
-					
-					// TODO YOUR CODE HERE
+
 					// The code here gets invoked whenever the user double clicks in the album tree
 					Album album = getSelectedAlbum();
 					clipTable.display(album);
@@ -114,8 +113,7 @@ public class MusicOrganizerWindow extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				// if left-double-click @@@changed =2 to ==1
 				if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2){
-					
-					// TODO YOUR CODE HERE
+
 					// The code here gets invoked whenever the uses double clicks on the list of sound clips
 					controller.playSoundClips();
 					
