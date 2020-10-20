@@ -196,7 +196,7 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		rateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//SoundClip ratedSong = (SoundClip) view.returnRatedSong();
-				
+
 				int rate = Integer.parseInt(view.popUpRate());
 				try {
 					if (rate == 4 || rate == 5) {
