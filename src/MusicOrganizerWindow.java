@@ -10,10 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;
 import javax.swing.event.MouseInputAdapter;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.DefaultTreeSelectionModel;
-import javax.swing.tree.TreePath;
+import javax.swing.tree.*;
 
 
 public class MusicOrganizerWindow extends JFrame {
@@ -39,14 +36,14 @@ public class MusicOrganizerWindow extends JFrame {
 		
 		// make the album tree
 		albumTree = makeCatalogTree();
-		
+
 		// make the clip table
 		clipTable = makeClipTable();
 		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
 				new JScrollPane(albumTree), new JScrollPane(clipTable));
 		splitPane.setDividerLocation(DEFAULT_WINDOW_WIDTH/2);
-		
+
 		// Place the buttonpanel above the two Jscrollpanes
 		JSplitPane horizontalSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT, buttonPanel, splitPane);
 
@@ -67,12 +64,27 @@ public class MusicOrganizerWindow extends JFrame {
 	 * Make the tree showing album names.
 	 */
 	private JTree makeCatalogTree() {
-		
+
+		DefaultMutableTreeNode flagged = new DefaultMutableTreeNode();
+		flagged.setUserObject(controller.getFlagAlbum());
+		flagged.setAllowsChildren(false);
+
+		DefaultMutableTreeNode rated = new DefaultMutableTreeNode();
+		rated.setUserObject(controller.getRateAlbum());
+		rated.setAllowsChildren(false);
+
+		DefaultMutableTreeNode rootAlbum = new DefaultMutableTreeNode();
+		rootAlbum.setUserObject(controller.getRootAlbum());
 
 		DefaultMutableTreeNode tree_root = new DefaultMutableTreeNode();
-		tree_root.setUserObject((Album) controller.getRootAlbum());
-		
+		tree_root.add(rated);
+		tree_root.add(flagged);
+		tree_root.add(rootAlbum);
+
 		final JTree tree = new JTree(tree_root);
+		tree.expandRow(0);
+		tree.setRootVisible(false);
+
 		tree.setMinimumSize(new Dimension(200, 400));
 		
 		tree.setToggleClickCount(3); // so that we can use double-clicks for
@@ -93,7 +105,6 @@ public class MusicOrganizerWindow extends JFrame {
 					// The code here gets invoked whenever the user double clicks in the album tree
 					Album album = getSelectedAlbum();
 					clipTable.display(album);
-
 					System.out.println("show the sound clips for album " + getSelectedTreeNode().getUserObject());
 				}
 			}
@@ -118,8 +129,6 @@ public class MusicOrganizerWindow extends JFrame {
 					controller.playSoundClips();
 					
 					System.out.println("clicked on clipTable");
-					
-					
 				}
 			}
 		});
@@ -144,15 +153,15 @@ public class MusicOrganizerWindow extends JFrame {
 	public String popUpRate(){
 		return (String) JOptionPane.showInputDialog(
 				albumTree,
-				"Rate the bloody song: ",
+				"Rate the sound clip: ",
 				"Rate Song",
 				JOptionPane.PLAIN_MESSAGE,
 				null,
 				null,
 				"");
 	}
-	public SoundClip returnRatedSong(){
-		return (SoundClip) getSelectedSoundClips();
+	public List<SoundClip> returnRatedSong(){
+		return getSelectedSoundClips();
 	}
 
 	/**Creates a pop up window showing a message

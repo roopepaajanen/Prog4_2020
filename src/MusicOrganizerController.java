@@ -16,9 +16,11 @@ public class MusicOrganizerController {
 		// Create the root album for all sound clips
 		root = new Album("All Sound Clips");
 		// Create the rate album for the very guud sound clips
-		rate = new Album("yes veri gud sundlips");
+
+		rate = new Album("yes veri gud sundlips", 1);
 		// Create the flag album for the flagged sound clips
-		flag = new Album("Flagged");
+
+		flag = new Album("Flagged", 1);
 
 		// Create the View in Model-View-Controller
 		view = new MusicOrganizerWindow(this);
@@ -74,7 +76,7 @@ public class MusicOrganizerController {
 		Album newAlbum = null;
 		try {
 			String newAlbumName = view.promptForAlbumName();
-			Album parentAlbum = view.getSelectedAlbum();
+			Album parentAlbum = view.getSelectedAlbum() instanceof AbstractAlbum;
 			newAlbum = new Album(newAlbumName, parentAlbum);
 			view.onAlbumAdded(newAlbum);
 			return newAlbum;
