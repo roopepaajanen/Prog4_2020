@@ -16,6 +16,8 @@ public class MusicOrganizerButtonPanel extends JPanel {
 	private JButton playButton;
 	private JButton undoButton;
 	private JButton redoButton;
+	private JButton flagButton;
+	private JButton rateButton;
 
 
 	
@@ -50,6 +52,12 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		redoButton = createRedoButton();
 		toolbar.add(redoButton);
 		redoButton.setEnabled(false);
+
+		flagButton = createFlagButton();
+		toolbar.add(flagButton);
+
+		rateButton = createRateButton();
+		toolbar.add(rateButton);
 
 		this.add(toolbar);
 
@@ -165,6 +173,32 @@ public class MusicOrganizerButtonPanel extends JPanel {
 			}
 		});
 		return redoButton;
+	}
+
+	private JButton createFlagButton(){
+		ImageIcon flagIcon = new ImageIcon("icons/Actions-flag-icon.png");
+		JButton flagButton = new JButton("Flag");
+		//JButton flagButton = new JButton(flagIcon);
+		flagButton.setToolTipText("Flag your song");
+		flagButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Do something idk
+			}
+		});
+		return flagButton;
+	}
+
+	private JButton createRateButton(){
+		ImageIcon rateIcon = new ImageIcon("icons/favourites_32.png");
+		JButton rateButton = new JButton("Rate");
+		//JButton rateButton = new JButton(rateIcon);
+		rateButton.setToolTipText("Rate your song");
+		rateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		return rateButton;
 	}
 
 	/**	Changes the state of the undo and redo buttons */
