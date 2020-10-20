@@ -28,7 +28,7 @@ public class MusicOrganizerWindow extends JFrame {
 	private final SoundClipTable clipTable;
 	private MusicOrganizerButtonPanel buttonPanel;
 	private MusicOrganizerController controller;
-	
+
 	public MusicOrganizerWindow(MusicOrganizerController contr) {
 
 		// Store a reference to the controller
@@ -39,7 +39,8 @@ public class MusicOrganizerWindow extends JFrame {
 		
 		// make the album tree
 		albumTree = makeCatalogTree();
-		
+
+
 		// make the clip table
 		clipTable = makeClipTable();
 		
@@ -60,7 +61,7 @@ public class MusicOrganizerWindow extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 				
 		this.setVisible(true);
-		
+		controller.addRateFlagRootAlbum();
 	}
 
 	/**
@@ -71,7 +72,7 @@ public class MusicOrganizerWindow extends JFrame {
 
 		DefaultMutableTreeNode tree_root = new DefaultMutableTreeNode();
 		tree_root.setUserObject((Album) controller.getRootAlbum());
-		
+
 		final JTree tree = new JTree(tree_root);
 		tree.setMinimumSize(new Dimension(200, 400));
 		
@@ -93,7 +94,6 @@ public class MusicOrganizerWindow extends JFrame {
 					// The code here gets invoked whenever the user double clicks in the album tree
 					Album album = getSelectedAlbum();
 					clipTable.display(album);
-
 					System.out.println("show the sound clips for album " + getSelectedTreeNode().getUserObject());
 				}
 			}
@@ -192,9 +192,7 @@ public class MusicOrganizerWindow extends JFrame {
 		}
 	}
 	
-	
-	
-	
+
 	/**
 	 * *****************************************************************
 	 * Methods to be called in response to events in the Music Organizer

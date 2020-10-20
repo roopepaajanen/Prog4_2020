@@ -7,6 +7,7 @@ public class MusicOrganizerController {
 	private MusicOrganizerWindow view;
 	private SoundClipBlockingQueue queue;
 	private Album root;
+	private Album addRateFlagRootAlbum;
 	private Album rate;
 	private Album flag;
 	CommandManager commandManager;
@@ -65,10 +66,6 @@ public class MusicOrganizerController {
 		return flag;
 	}
 
-	public Album getRateAlbum(){return rate;}
-
-	public Album getFlagAlbum(){return flag;}
-
 	//----------------------------------------------------------------------------------------------------------------
 	/**
 	 * Adds an album to the Music Organizer
@@ -87,6 +84,15 @@ public class MusicOrganizerController {
 			view.showMessage("Select an album first!");
 		}
 		return newAlbum;
+	}
+
+	public Album addRateFlagRootAlbum(){
+		Album addRateFlagRootAlbum = null;
+		String Albumname = "Sökbaserade albums";
+		Album parentAlbum = root;
+		addRateFlagRootAlbum = new Album(Albumname, parentAlbum);
+		view.onAlbumAdded(addRateFlagRootAlbum);
+		return addRateFlagRootAlbum;
 	}
 
 	/**

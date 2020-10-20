@@ -1,15 +1,14 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.*;
+import java.util.List;
 
 public class MusicOrganizerButtonPanel extends JPanel {
 
 	private MusicOrganizerController controller;
 	private MusicOrganizerWindow view;
-	private Album album;
-	
+
 	private JButton newAlbumButton;
 	private JButton deleteAlbumButton;
 	private JButton addSoundClipsButton;
@@ -196,11 +195,19 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		rateButton.setToolTipText("Rate your song");
 		rateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SoundClip ratedSong = (SoundClip) view.returnRatedSong();
+				List<SoundClip> ratedSong = view.returnRatedSong();
 				int rate = Integer.parseInt(view.popUpRate());
-				if(rate>3){
-					controller.getRateAlbum().addSoundClip(ratedSong);
+				try{
+					if(rate==3 || rate ==4){
+						controller.getRateAlbum().addSoundClips(ratedSong);
+					}
+					if(rate >=0  && rate < 4){
+						/**Do nothing*/
+					}
+				} catch (Exception ex) {
+					System.out.println("Wrooong");
 				}
+
 			}
 		});
 		return rateButton;
