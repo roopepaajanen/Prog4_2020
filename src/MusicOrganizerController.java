@@ -13,11 +13,11 @@ public class MusicOrganizerController {
 
 	public MusicOrganizerController() {
 
-		// TODO: Create the root album for all sound clips
+		// Create the root album for all sound clips
 		root = new Album("All Sound Clips");
-
+		// Create the rate album for the very guud sound clips
 		rate = new Album("yes veri gud sundlips");
-
+		// Create the flag album for the flagged sound clips
 		flag = new Album("Flagged");
 
 		// Create the View in Model-View-Controller
@@ -51,6 +51,18 @@ public class MusicOrganizerController {
 	 */
 	public Album getRootAlbum(){
 		return root;
+	}
+	/**
+	 * Returns the rate album
+	 */
+	public Album getRateAlbum(){
+		return rate;
+	}
+	/**
+	 * Returns the flag album
+	 */
+	public Album getFlagAlbum(){
+		return flag;
 	}
 
 	//----------------------------------------------------------------------------------------------------------------
