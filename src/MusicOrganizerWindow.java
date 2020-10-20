@@ -164,6 +164,10 @@ public class MusicOrganizerWindow extends JFrame {
 		return getSelectedSoundClips();
 	}
 
+	public List<SoundClip> returnFlaggedSong(){
+		return getSelectedSoundClips();
+	}
+
 	/**Creates a pop up window showing a message
 	 * @param message - the message to display
 	 */

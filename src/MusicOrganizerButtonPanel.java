@@ -181,8 +181,16 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		//JButton flagButton = new JButton(flagIcon);
 		flagButton.setToolTipText("Flag your song");
 		flagButton.addActionListener(new ActionListener() {
+			List<SoundClip> flaggedSong = view.returnFlaggedSong();
 			public void actionPerformed(ActionEvent e) {
-				//Do something idk
+				try {
+					if (!controller.getFlagAlbum().containsClip((SoundClip) flaggedSong)) {
+						controller.getFlagAlbum().addSoundClips(flaggedSong);
+						//flaggedSong.toString().
+					}
+				} catch (Exception ex) {
+					System.out.println("Error");
+				}
 			}
 		});
 		return flagButton;
@@ -220,11 +228,18 @@ public class MusicOrganizerButtonPanel extends JPanel {
 				List<SoundClip> ratedSong = view.returnRatedSong();
 				int rate = Integer.parseInt(view.popUpRate());
 				try{
-					if(rate==3 || rate ==4){
-						controller.getRateAlbum().addSoundClips(ratedSong);
+					if(rate==5 || rate ==4){
+						if (!controller.getRateAlbum().containsClip((SoundClip) ratedSong)) {
+							controller.getRateAlbum().addSoundClips(ratedSong);
+							System.out.println(rate);
+							System.out.println(ratedSong);
+						}
 					}
 					if(rate >=0  && rate < 4){
                         //Do nothing
+						if(controller.getRateAlbum().containsClip((SoundClip) ratedSong)){
+							controller.getRateAlbum().removeSoundClip((SoundClip) ratedSong);
+						}
                     }
                 } catch (Exception ex) {
                     System.out.println("Wrooong");

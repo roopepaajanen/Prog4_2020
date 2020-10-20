@@ -1,6 +1,8 @@
 import javax.swing.SwingUtilities;
 
+
 public class MainApplication {
+
 
 	/**
 	 * Main entry point of music organizer.
