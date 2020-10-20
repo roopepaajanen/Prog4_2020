@@ -10,18 +10,18 @@ public class Album extends AbstractAlbum{
     private Album parentAlbum;
 
     Album(String albumName) { //constructor that creates the root album
-        this.albumName = albumName;
+        super(albumName);
         parentAlbum = null;
         desiredAlbumSoundClips = new LinkedList<SoundClip>();
         subAlbumList = new LinkedList<Album>();
     }
-    Album(String albumName, int a) { //constructor that creates the rate and flag album
+    /*Album(String albumName, int a) { //constructor that creates the rate and flag album
         this.albumName = albumName;
         parentAlbum = null;
         desiredAlbumSoundClips = new LinkedList<SoundClip>();
-    }
+    }*/
     Album(String albumName, Album parentAlbum) { //constructor that creates sub albums
-        this.albumName = albumName;
+        super(albumName);
         this.parentAlbum = parentAlbum;
         desiredAlbumSoundClips = new LinkedList<SoundClip>();
         subAlbumList = new LinkedList<Album>();
