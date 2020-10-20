@@ -53,6 +53,10 @@ public class MusicOrganizerController {
 		return root;
 	}
 
+	public Album getRateAlbum(){return rate;}
+
+	public Album getFlagAlbum(){return flag;}
+
 	//----------------------------------------------------------------------------------------------------------------
 	/**
 	 * Adds an album to the Music Organizer
@@ -81,6 +85,7 @@ public class MusicOrganizerController {
 		addAlbumCommand command = new addAlbumCommand();
 		commandManager.executeCommand(command);
 	}
+
 
 	/**
 	 * Implements the Command interface to perform either its normal execution, or to either undo or redo.

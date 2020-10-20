@@ -8,6 +8,7 @@ public class MusicOrganizerButtonPanel extends JPanel {
 
 	private MusicOrganizerController controller;
 	private MusicOrganizerWindow view;
+	private Album album;
 	
 	private JButton newAlbumButton;
 	private JButton deleteAlbumButton;
@@ -195,9 +196,10 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		rateButton.setToolTipText("Rate your song");
 		rateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int rate = view.popUpRate();
+				SoundClip ratedSong = (SoundClip) view.returnRatedSong();
+				int rate = Integer.parseInt(view.popUpRate());
 				if(rate>3){
-
+					controller.getRateAlbum().addSoundClip(ratedSong);
 				}
 			}
 		});

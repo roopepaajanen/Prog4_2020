@@ -143,8 +143,8 @@ public class MusicOrganizerWindow extends JFrame {
 				"");
 	}
 
-	public int popUpRate(){
-		return (int) JOptionPane.showInputDialog(
+	public String popUpRate(){
+		return (String) JOptionPane.showInputDialog(
 				albumTree,
 				"Rate the bloody song: ",
 				"Rate Song",
@@ -152,6 +152,9 @@ public class MusicOrganizerWindow extends JFrame {
 				null,
 				null,
 				"");
+	}
+	public List<SoundClip> returnRatedSong(){
+		return getSelectedSoundClips();
 	}
 
 	/**Creates a pop up window showing a message
