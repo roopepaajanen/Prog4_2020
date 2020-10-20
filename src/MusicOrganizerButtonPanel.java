@@ -195,7 +195,10 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		rateButton.setToolTipText("Rate your song");
 		rateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int rate = view.popUpRate();
+				if(rate>3){
 
+				}
 			}
 		});
 		return rateButton;
