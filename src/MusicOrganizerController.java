@@ -76,7 +76,7 @@ public class MusicOrganizerController {
 		Album newAlbum = null;
 		try {
 			String newAlbumName = view.promptForAlbumName();
-			Album parentAlbum = view.getSelectedAlbum() instanceof AbstractAlbum;
+			Album parentAlbum = view.getSelectedAlbum();
 			newAlbum = new Album(newAlbumName, parentAlbum);
 			view.onAlbumAdded(newAlbum);
 			return newAlbum;
