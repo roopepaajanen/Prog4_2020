@@ -1,14 +1,14 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.*;
 
 public class MusicOrganizerButtonPanel extends JPanel {
 
 	private MusicOrganizerController controller;
 	private MusicOrganizerWindow view;
-
+	
 	private JButton newAlbumButton;
 	private JButton deleteAlbumButton;
 	private JButton addSoundClipsButton;
@@ -189,6 +189,28 @@ public class MusicOrganizerButtonPanel extends JPanel {
 	}
 
 	private JButton createRateButton(){
+		/*ImageIcon rateIcon = new ImageIcon("icons/favourites_32.png");
+		JButton rateButton = new JButton("Rate");
+		//JButton rateButton = new JButton(rateIcon);
+		rateButton.setToolTipText("Rate your song");
+		rateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//SoundClip ratedSong = (SoundClip) view.returnRatedSong();
+				List<SoundClip> ratedSong = view.returnRatedSong();
+				int rate = Integer.parseInt(view.popUpRate());
+				try {
+					if (rate == 4 || rate == 5) {
+						controller.getRateAlbum().addSoundClips(ratedSong);
+						//add nummber to song
+					} else if (rate >= 0 && rate < 4) {
+						//add nummber to song
+					}
+				}catch (Exception f){
+					view.showMessage("E du dumm eller väfään, mannen?" + f);
+				}
+			}
+		});
+		return rateButton;*/
 		ImageIcon rateIcon = new ImageIcon("icons/favourites_32.png");
 		JButton rateButton = new JButton("Rate");
 		//JButton rateButton = new JButton(rateIcon);
@@ -202,16 +224,16 @@ public class MusicOrganizerButtonPanel extends JPanel {
 						controller.getRateAlbum().addSoundClips(ratedSong);
 					}
 					if(rate >=0  && rate < 4){
-						/**Do nothing*/
-					}
-				} catch (Exception ex) {
-					System.out.println("Wrooong");
-				}
+                        //Do nothing
+                    }
+                } catch (Exception ex) {
+                    System.out.println("Wrooong");
+                }
 
-			}
-		});
-		return rateButton;
-	}
+            }
+        });
+        return rateButton;
+    }
 
 	/**	Changes the state of the undo and redo buttons */
 	public void enableDisableButton(Boolean undoPossible, Boolean redoPossible){
