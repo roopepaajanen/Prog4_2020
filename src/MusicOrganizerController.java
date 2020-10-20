@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -6,7 +7,6 @@ public class MusicOrganizerController {
 	private MusicOrganizerWindow view;
 	private SoundClipBlockingQueue queue;
 	private Album root;
-	private int albumAmount = 0;
 	CommandManager commandManager;
 
 	public MusicOrganizerController() {
@@ -31,13 +31,13 @@ public class MusicOrganizerController {
 	 * Load the sound clips found in all subfolders of a path on disk. If path is not
 	 * an actual folder on disk, has no effect.
 	 */
-	public Set<SoundClip> loadSoundClips(String path) {
+	public void loadSoundClips(String path) {
 		Set<SoundClip> clips = SoundClipLoader.loadSoundClips(path);
 		// TODO: Add the loaded sound clips to the root album
-		//List<SoundClip> theClips = root.getSoundClipsFromAlbum();
-		root.getSoundClipsFromAlbum().addAll(clips);
+		List<SoundClip> theClips = new ArrayList<>(clips);
+		root.addSoundClips(theClips);
+
 		System.out.println(root.getSoundClipsFromAlbum());
-		return clips;
 	}
 
 	/**
@@ -47,6 +47,7 @@ public class MusicOrganizerController {
 		return root;
 	}
 
+	//----------------------------------------------------------------------------------------------------------------
 	/**
 	 * Adds an album to the Music Organizer
 	 */
@@ -58,7 +59,6 @@ public class MusicOrganizerController {
 			Album parentAlbum = view.getSelectedAlbum();
 			 newAlbum = new Album(newAlbumName, parentAlbum);
 			view.onAlbumAdded(newAlbum);
-			albumAmount++;
 			return newAlbum;
 		}
 		catch (NullPointerException e){
@@ -99,6 +99,7 @@ public class MusicOrganizerController {
 		}
 	}
 
+	//----------------------------------------------------------------------------------------------------------------
 	/**
 	 * Removes an album from the Music Organizer
 	 */
@@ -106,13 +107,10 @@ public class MusicOrganizerController {
 		//TODO: Add your code here
 		try {
 			Album deleteAlbum = view.getSelectedAlbum();
-			if (albumAmount > 0) {
+			if(!(deleteAlbum == root)) {
 				view.onAlbumRemoved(deleteAlbum);
-				albumAmount--;
 			}
-			if(deleteAlbum == root){
-				view.showMessage("You can't delete the root album :(");
-			}
+
 		}
 		catch (NullPointerException e){
 			view.showMessage("Select an album first!");
@@ -153,6 +151,7 @@ public class MusicOrganizerController {
 		}
 	}
 
+	//----------------------------------------------------------------------------------------------------------------
 	/**
 	 * Adds sound clips to an album
 	 */
@@ -207,6 +206,7 @@ public class MusicOrganizerController {
 		}
 	}
 
+	//----------------------------------------------------------------------------------------------------------------
 	/**
 	 * Removes sound clips from an album
 	 */
@@ -256,6 +256,7 @@ public class MusicOrganizerController {
 		}
 	}
 
+	//----------------------------------------------------------------------------------------------------------------
 	/**
 	 * Puts the selected sound clips on the queue and lets
 	 * the sound clip player thread play them. Essentially, when

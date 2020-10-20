@@ -5,7 +5,6 @@ import static junit.framework.TestCase.*;
 import static org.junit.Assert.assertNotEquals;
 
 class AlbumTest {
-    MusicOrganizerController controller = new MusicOrganizerController();
     SoundClip clip = new SoundClip(new File("random_song_name"));
     Album rootAlbum = new Album("root");
     Album subi1 = new Album("subi 1",rootAlbum);
@@ -55,12 +54,12 @@ class AlbumTest {
         assertFalse("Sound clip was removed incorrectly", rootAlbum.containsClip(clip));
     }
 
-    /**@Test
+    @Test
     void checkAlbumGetsRemoved(){
-        controller.deleteAlbum();
-        assertFalse(subiSubi1.getParentAlbum().);
+        assert ((subiSubi1.getParentAlbum().equals(subi1)) &&(subi1.getParentAlbum().equals(rootAlbum)));
+        assert ((subiSubi2.getParentAlbum().equals(subi2)) &&(subi2.getParentAlbum().equals(rootAlbum)));
 
-    }*/
+    }
 
     /**test case to check if an album contains certain sound clips. */
     SoundClip clip1 = new SoundClip(new File("testi1"));
