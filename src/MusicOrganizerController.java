@@ -88,14 +88,6 @@ public class MusicOrganizerController {
 		return newAlbum;
 	}
 
-	public Album addRateFlagRootAlbum(){
-		Album addRateFlagRootAlbum = null;
-		String Albumname = "Sökbaserade albums";
-		Album parentAlbum = root;
-		addRateFlagRootAlbum = new Album(Albumname, parentAlbum);
-		view.onAlbumAdded(addRateFlagRootAlbum);
-		return addRateFlagRootAlbum;
-	}
 
 	/**
 	 * The respective button calls this method to then communicate between their respective Command method and the
