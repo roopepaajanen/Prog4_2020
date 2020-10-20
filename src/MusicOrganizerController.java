@@ -7,12 +7,18 @@ public class MusicOrganizerController {
 	private MusicOrganizerWindow view;
 	private SoundClipBlockingQueue queue;
 	private Album root;
+	private Album rate;
+	private Album flag;
 	CommandManager commandManager;
 
 	public MusicOrganizerController() {
 
 		// TODO: Create the root album for all sound clips
 		root = new Album("All Sound Clips");
+
+		rate = new Album("yes veri gud sundlips");
+
+		flag = new Album("Flagged");
 
 		// Create the View in Model-View-Controller
 		view = new MusicOrganizerWindow(this);
@@ -107,7 +113,7 @@ public class MusicOrganizerController {
 		//TODO: Add your code here
 		try {
 			Album deleteAlbum = view.getSelectedAlbum();
-			if(!(deleteAlbum == root)) {
+			if((deleteAlbum != root) || (deleteAlbum != rate) || (deleteAlbum != flag)) {
 				view.onAlbumRemoved(deleteAlbum);
 			}
 
