@@ -70,6 +70,8 @@ public class Album extends AbstractAlbum{
         for (Album album : subAlbumList) {
             album.removeSoundClip(clip);
         }
-        desiredAlbumSoundClips.remove(clip);
+        if(parentAlbum != null) {
+            desiredAlbumSoundClips.remove(clip);
+        }
     }
 }

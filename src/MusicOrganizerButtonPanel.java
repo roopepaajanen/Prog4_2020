@@ -211,18 +211,22 @@ public class MusicOrganizerButtonPanel extends JPanel {
 				List<SoundClip> selectedSoundClips = view.getSelectedSoundClips();
 				int rate = Integer.parseInt(view.popUpRate());
 				RatedAlbum ratedAlbum = controller.getRateAlbum();
-				for(SoundClip clip : selectedSoundClips){
-					clip.setRating(rate);
-				}
-				try {
-					if (rate == 5 || rate == 4) {
-						ratedAlbum.addSoundClips(selectedSoundClips);
+
+				if(rate >=0 && rate <=5) {
+					for(SoundClip clip : selectedSoundClips){
+						clip.setRating(rate);
 					}
-					if (rate >= 0 && rate < 4) {
-						ratedAlbum.removeSoundClips(selectedSoundClips);
+					try {
+						if (rate == 5 || rate == 4) {
+							ratedAlbum.addSoundClips(selectedSoundClips);
+						}
+						if (rate < 4) {
+							ratedAlbum.removeSoundClips(selectedSoundClips);
+						}
+
+					} catch (Exception f) {
+						view.showMessage("Please enter a rating from 0 to 5!" + f);
 					}
-				} catch (Exception f) {
-					view.showMessage("Please enter a rating from 0 to 5!" + f);
 				}
 				view.onClipsUpdated();
 			}
