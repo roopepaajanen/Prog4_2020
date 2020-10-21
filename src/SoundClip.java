@@ -8,6 +8,7 @@ public class SoundClip {
 
     private final File file;
     private int rating;
+    private String color;
 
     /**
      * Make a SoundClip from a file.
@@ -17,6 +18,7 @@ public class SoundClip {
         assert file != null;
         this.file = file;
         this.rating = 0;
+        color = "#000080"; // Navy Blue, lol XD
     }
 
     /**
@@ -26,13 +28,27 @@ public class SoundClip {
         return file;
     }
 
+    /**
+     * @return a little fun html and hexadecimal color combination to display a nice GUI. XD
+     */
     public String toString(){
-        return file.getName();
+        String originalString = "<html><pre><font color= \"" + color + "\">" + file.getName() + "</font>";
+        String ratingString = "<font color=" + "#EE82EE" + ">"+ rating + "</font></pre></html>";
+        String spacing = "<font color=" + "#696969" + ">" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rate: " + "</font>";
+
+        return (originalString + spacing + ratingString);
     }
 
-    public int getRating(){
-        return rating;
+    /**
+     * @set the color of the text
+     */
+    public void setColor(String color){
+        this.color = color;
     }
+
+    /*public int getRating(){
+        return rating;
+    }*/
 
     public void setRating(int rating){
         this.rating = rating;

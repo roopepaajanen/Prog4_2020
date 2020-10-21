@@ -19,8 +19,6 @@ public class MusicOrganizerWindow extends JFrame {
 	private static int DEFAULT_WINDOW_WIDTH = 900;
 	private static int DEFAULT_WINDOW_HEIGHT = 600;
 
-	
-
 	private final JTree albumTree;
 	private final SoundClipTable clipTable;
 	private MusicOrganizerButtonPanel buttonPanel;
@@ -57,7 +55,6 @@ public class MusicOrganizerWindow extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 				
 		this.setVisible(true);
-		
 	}
 
 	/**
@@ -100,14 +97,24 @@ public class MusicOrganizerWindow extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// if left-double-click @@@changed =2 to ==1
+				if(e.equals(null))
 				if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2){
 					// The code here gets invoked whenever the user double clicks in the album tree
 					clipTable.display(getSelectedAlbum());
 					System.out.println("show the sound clips for album " + getSelectedTreeNode().getUserObject());
+
+					/**
+					 * Checks if the currently selected albums should display all or a limited amount of buttons.
+					 */
+					if(getSelectedAlbum().equals(controller.getRateAlbum()) || getSelectedAlbum().equals(controller.getFlagAlbum())) {
+						sendButtonsAvailability(false, false, false, false);
+					}
+					else{
+						sendButtonsAvailability(true, true, true, true);
+					}
 				}
 			}
 		});
-
 		return tree;
 	}
 
@@ -148,6 +155,10 @@ public class MusicOrganizerWindow extends JFrame {
 				"");
 	}
 
+	/**
+	 * Pop up a dialog box prompting the user for a rating of the sound clip.
+	 * Returns the rating, or null if the user pressed Cancel
+	 */
 	public String popUpRate(){
 		return (String) JOptionPane.showInputDialog(
 				albumTree,
@@ -197,8 +208,7 @@ public class MusicOrganizerWindow extends JFrame {
 	}
 	
 	
-	
-	
+
 	/**
 	 * *****************************************************************
 	 * Methods to be called in response to events in the Music Organizer
@@ -221,8 +231,6 @@ public class MusicOrganizerWindow extends JFrame {
 		for(Enumeration e = ((DefaultMutableTreeNode) model.getRoot()).breadthFirstEnumeration(); e.hasMoreElements();){
 			DefaultMutableTreeNode parent = (DefaultMutableTreeNode) e.nextElement();
 
-			//DONE!
-			// TODO: Get the parent album of newAlbum
 			Album parentAlbum = newAlbum.getParentAlbum();
 
 			if(parentAlbum.equals(parent.getUserObject())){
@@ -264,16 +272,21 @@ public class MusicOrganizerWindow extends JFrame {
 	
 	/**
 	 * When called, the contents of the selected album are displayed in the clipTable
-	 * 
 	 */
 	public void onClipsUpdated(){
-
 		AbstractAlbum a = (AbstractAlbum) getSelectedTreeNode().getUserObject();
 		clipTable.display(a);
 	}
 
+	//----------------------------------------------------------------------------------------------------------------
 	/**	Sends the availability of the undo and redo buttons to the Button Panel class to activate or deactivate */
 	public void sendButtonAvailability(Boolean undoPossible, Boolean redoPossible){
 		buttonPanel.enableDisableButton(undoPossible,redoPossible);
+	}
+
+	/**	Sends the availability of the other buttons to the Button Panel class to activate or deactivate */
+	public void sendButtonsAvailability(Boolean nAPossible, Boolean dAPossible, Boolean aSCPossible,
+										Boolean rSCPossible){
+		buttonPanel.almostAllButtonAvailability(nAPossible, dAPossible, aSCPossible, rSCPossible);
 	}
 }

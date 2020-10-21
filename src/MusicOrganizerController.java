@@ -15,11 +15,11 @@ public class MusicOrganizerController {
 
 		// Create the root album for all sound clips
 		root = new Album("All Sound Clips");
+
 		// Create the rate album for the very guud sound clips
-
 		rate = new RatedAlbum("yes veri gud ääni gobitar");
-		// Create the flag album for the flagged sound clips
 
+		// Create the flag album for the flagged sound clips
 		flag = new FlaggedAlbum("flaggged gobitar");
 
 		// Create the View in Model-View-Controller
@@ -48,6 +48,7 @@ public class MusicOrganizerController {
 		System.out.println(root.getSoundClipsFromAlbum());
 	}
 
+	//----------------------------------------------------------------------------------------------------------------
 	/**
 	 * Returns the root album
 	 */
@@ -74,7 +75,6 @@ public class MusicOrganizerController {
 	 * Adds an album to the Music Organizer
 	 */
 	public Album addNewAlbum() throws NullPointerException{
-		// TODO: Add your code here
 		Album newAlbum = null;
 		try {
 			AbstractAlbum parentAlbum = view.getSelectedAlbum();
@@ -99,7 +99,6 @@ public class MusicOrganizerController {
 		addAlbumCommand command = new addAlbumCommand();
 		commandManager.executeCommand(command);
 	}
-
 
 	/**
 	 * Implements the Command interface to perform either its normal execution, or to either undo or redo.
@@ -129,7 +128,6 @@ public class MusicOrganizerController {
 	 * Removes an album from the Music Organizer
 	 */
 	public void deleteAlbum() throws NullPointerException{
-		//TODO: Add your code here
 		try {
 			AbstractAlbum deleteAlbum = view.getSelectedAlbum();
 			if((deleteAlbum instanceof Album) && (deleteAlbum != root)) {
@@ -184,7 +182,6 @@ public class MusicOrganizerController {
 	 * Adds sound clips to an album
 	 */
 	public void addSoundClips() throws NullPointerException{
-		// TODO: Add your code here
 		try {
 			view.getSelectedAlbum().addSoundClips(view.getSelectedSoundClips());
 			view.onClipsUpdated();
@@ -243,7 +240,6 @@ public class MusicOrganizerController {
 	 * Removes sound clips from an album
 	 */
 	public void removeSoundClips(){
-		// TODO: Add your code here
 		view.getSelectedAlbum().removeSoundClips(view.getSelectedSoundClips());
 		view.onClipsUpdated();
 	}
@@ -305,6 +301,7 @@ public class MusicOrganizerController {
 			queue.enqueue(l.get(i));
 	}
 
+	//----------------------------------------------------------------------------------------------------------------
 	/**	Checks if the redo stack is empty or not */
 	public boolean isRedoAvailable(){
 		return !commandManager.getRedoStack().empty();
@@ -315,11 +312,6 @@ public class MusicOrganizerController {
 		return !commandManager.getUndoStack().empty();
 	}
 
-	/**	Sends the status from the undo and redo stacks checks forward to MusicOrganizerWindow*/
-	public void isButtonAvailable(){
-		view.sendButtonAvailability(isUndoAvailable(), isRedoAvailable());
-	}
-
 	/**	Invokes the undo functionality in the CommandManager class */
 	public void undo(){
 		commandManager.undo();
@@ -328,5 +320,10 @@ public class MusicOrganizerController {
 	/**	Invokes the redo functionality in the CommandManager class */
 	public void redo(){
 		commandManager.redo();
+	}
+
+	/**	Sends the status from the undo and redo stacks checks forward to MusicOrganizerWindow*/
+	public void isButtonAvailable(){
+		view.sendButtonAvailability(isUndoAvailable(), isRedoAvailable());
 	}
 }

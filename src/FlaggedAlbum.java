@@ -39,6 +39,7 @@ public class FlaggedAlbum extends AbstractAlbum {
         desiredAlbumSoundClips.remove(clip);
     }
 
-    public String toString(){return "Flagged Sound Clips";}
-
+    public String toString(){
+        return "Flagged Sound Clips";
+    }
 }

@@ -8,11 +8,11 @@ public class MusicOrganizerButtonPanel extends JPanel {
 
 	private MusicOrganizerController controller;
 	private MusicOrganizerWindow view;
-	
+
 	private JButton newAlbumButton;
 	private JButton deleteAlbumButton;
 	private JButton addSoundClipsButton;
-	private JButton removeSoundClipsButton;	
+	private JButton removeSoundClipsButton;
 	private JButton playButton;
 	private JButton undoButton;
 	private JButton redoButton;
@@ -20,16 +20,15 @@ public class MusicOrganizerButtonPanel extends JPanel {
 	private JButton rateButton;
 
 
-	
-	public MusicOrganizerButtonPanel(MusicOrganizerController contr, MusicOrganizerWindow view){
+	public MusicOrganizerButtonPanel(MusicOrganizerController contr, MusicOrganizerWindow view) {
 		super(new BorderLayout());
 
 		controller = contr;
-		
+
 		this.view = view;
-		
+
 		JToolBar toolbar = new JToolBar();
-		
+
 		newAlbumButton = createNewAlbumButton();
 		toolbar.add(newAlbumButton);
 
@@ -62,21 +61,20 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		this.add(toolbar);
 
 	}
-	
+
 	/**
 	 * Note: You can replace the text strings in the instantiations of the JButtons
 	 * below with ImageIcons if you prefer to have buttons with icons instead of
 	 * buttons with text strings
-	 * 
-	 *  Example:
-	 *  ImageIcon newAlbumIcon = new ImageIcon("icons/folder_add_32.png");
-	 *  JButton newAlbumButton = new JButton(newAlbumIcon);
-	 *  
-	 *  will put the imageIcon on the button, instead of the text "New Album", as 
-	 *  done below
-	 * 
+	 * <p>
+	 * Example:
+	 * ImageIcon newAlbumIcon = new ImageIcon("icons/folder_add_32.png");
+	 * JButton newAlbumButton = new JButton(newAlbumIcon);
+	 * <p>
+	 * will put the imageIcon on the button, instead of the text "New Album", as
+	 * done below
 	 */
-	
+
 	private JButton createNewAlbumButton() {
 		ImageIcon newAlbumIcon = new ImageIcon("icons/folder_add_32.png");
 		JButton newAlbumButton = new JButton("New Album");
@@ -90,7 +88,7 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		});
 		return newAlbumButton;
 	}
-	
+
 	private JButton createDeleteAlbumButton() {
 		ImageIcon deleteAlbumIcon = new ImageIcon("icons/folder_delete_32.png");
 		JButton deleteAlbumButton = new JButton("Remove Album");
@@ -118,7 +116,7 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		});
 		return addSoundClipButton;
 	}
-	
+
 	private JButton createRemoveSoundClipsButton() {
 		ImageIcon removeSoundClipsIcon = new ImageIcon("icons/document_delete_32.png");
 		JButton removeSoundClipsButton = new JButton("Remove Sound Clips");
@@ -132,7 +130,7 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		});
 		return removeSoundClipsButton;
 	}
-	
+
 	private JButton createPlayButton() {
 		ImageIcon playIcon = new ImageIcon("icons/play_32.png");
 		JButton playButton = new JButton("Play");
@@ -147,7 +145,7 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		return playButton;
 	}
 
-	private JButton createUndoButton(){
+	private JButton createUndoButton() {
 		ImageIcon undoIcon = new ImageIcon("icons/Actions-blue-arrow-undo-icon.png");
 		JButton undoButton = new JButton("Undo");
 		//JButton undoButton = new JButton(undoIcon);
@@ -161,7 +159,7 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		return undoButton;
 	}
 
-	private JButton createRedoButton(){
+	private JButton createRedoButton() {
 		ImageIcon redoIcon = new ImageIcon("icons/Actions-blue-arrow-redo-icon.png");
 		JButton redoButton = new JButton("Redo");
 		//JButton redoButton = new JButton(redoIcon);
@@ -175,7 +173,7 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		return redoButton;
 	}
 
-	private JButton createFlagButton(){
+	private JButton createFlagButton() {
 		ImageIcon flagIcon = new ImageIcon("icons/Actions-flag-icon.png");
 		JButton flagButton = new JButton("Flag");
 		//JButton flagButton = new JButton(flagIcon);
@@ -188,13 +186,14 @@ public class MusicOrganizerButtonPanel extends JPanel {
 					for (SoundClip clip : flaggedSoundClips) {
 						if (flaggedAlbum.containsClip(clip)) {
 							flaggedAlbum.removeSoundClip(clip);
-						}
-						else{
+							clip.setColor("black");
+						} else {
 							flaggedAlbum.addSoundClip(clip);
+							clip.setColor("red");
 						}
 					}
 				} catch (Exception ex) {
-					System.out.println("Error");
+					view.showMessage("Please select a sound clip first!" + ex);
 				}
 				view.onClipsUpdated();
 			}
@@ -202,39 +201,51 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		return flagButton;
 	}
 
-	private JButton createRateButton(){
+	private JButton createRateButton() {
 		ImageIcon rateIcon = new ImageIcon("icons/favourites_32.png");
 		JButton rateButton = new JButton("Rate");
 		//JButton rateButton = new JButton(rateIcon);
 		rateButton.setToolTipText("Rate your song");
 		rateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				List<SoundClip> ratedSong = view.getSelectedSoundClips();
-				System.out.println("nåt skit "+ratedSong.size());
+				List<SoundClip> selectedSoundClips = view.getSelectedSoundClips();
 				int rate = Integer.parseInt(view.popUpRate());
-				System.out.println(rate);
 				RatedAlbum ratedAlbum = controller.getRateAlbum();
-				try{
+				for(SoundClip clip : selectedSoundClips){
+					clip.setRating(rate);
+				}
+				try {
 					if (rate == 5 || rate == 4) {
-						ratedAlbum.addSoundClips(ratedSong);
+						ratedAlbum.addSoundClips(selectedSoundClips);
 					}
 					if (rate >= 0 && rate < 4) {
-						//add rating to the sound clip
-						ratedAlbum.removeSoundClips(ratedSong);
+						ratedAlbum.removeSoundClips(selectedSoundClips);
 					}
-                } catch (Exception f) {
-                    System.out.println("E du dumm eller väfään, mannen?" + f);
-                }
+				} catch (Exception f) {
+					view.showMessage("Please enter a rating from 0 to 5!" + f);
+				}
 				view.onClipsUpdated();
-            }
-        });
-        return rateButton;
-    }
+			}
+		});
+		return rateButton;
+	}
 
-	/**	Changes the state of the undo and redo buttons */
-	public void enableDisableButton(Boolean undoPossible, Boolean redoPossible){
+	/**
+	 * Changes the state of the undo and redo buttons
+	 */
+	public void enableDisableButton(Boolean undoPossible, Boolean redoPossible) {
 		undoButton.setEnabled(undoPossible);
 		redoButton.setEnabled(redoPossible);
 	}
 
+	/**
+	 * Changes the state of the creation and deletion of albums and sound clips buttons
+	 */
+	public void almostAllButtonAvailability(Boolean nAPossible, Boolean dAPossible, Boolean aSCPossible,
+											Boolean rSCPossible) {
+		newAlbumButton.setEnabled(nAPossible);
+		deleteAlbumButton.setEnabled(dAPossible);
+		addSoundClipsButton.setEnabled(aSCPossible);
+		removeSoundClipsButton.setEnabled(rSCPossible);
+	}
 }
