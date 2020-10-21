@@ -182,17 +182,21 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		flagButton.setToolTipText("Flag your song");
 		flagButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				List<SoundClip> flaggedSong = view.getSelectedSoundClips();
+				List<SoundClip> flaggedSoundClips = view.getSelectedSoundClips();
 				FlaggedAlbum flaggedAlbum = controller.getFlagAlbum();
 				try {
-					for(SoundClip clip : flaggedSong){
-						if(!flaggedAlbum.containsClip(clip)){
+					for (SoundClip clip : flaggedSoundClips) {
+						if (flaggedAlbum.containsClip(clip)) {
+							flaggedAlbum.removeSoundClip(clip);
+						}
+						else{
 							flaggedAlbum.addSoundClip(clip);
 						}
 					}
 				} catch (Exception ex) {
 					System.out.println("Error");
 				}
+				view.onClipsUpdated();
 			}
 		});
 		return flagButton;

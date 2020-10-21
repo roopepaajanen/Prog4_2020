@@ -2,7 +2,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class FlaggedAlbum extends AbstractAlbum {
-    private List<SoundClip> desiredAlbumSoundClips; //List of sound clips
 
     public FlaggedAlbum(String albumName) {
         super(albumName);
@@ -11,12 +10,16 @@ public class FlaggedAlbum extends AbstractAlbum {
 
     @Override
     void addSoundClips(List<SoundClip> clipsToAdd) {
-
+        for(SoundClip s : clipsToAdd) {
+            this.addSoundClip(s);
+        }
     }
 
     @Override
     void addSoundClip(SoundClip clip) {
-
+        if (!desiredAlbumSoundClips.contains(clip)){
+            desiredAlbumSoundClips.add(clip);
+        }
     }
 
     @Override
@@ -26,12 +29,14 @@ public class FlaggedAlbum extends AbstractAlbum {
 
     @Override
     void removeSoundClips(List<SoundClip> clipsToRemove) {
-
+        for(SoundClip s : clipsToRemove) {
+            this.removeSoundClip(s);
+        }
     }
 
     @Override
     void removeSoundClip(SoundClip clip) {
-
+        desiredAlbumSoundClips.remove(clip);
     }
 
     public String toString(){return "Flagged Sound Clips";}
