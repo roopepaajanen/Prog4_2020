@@ -28,9 +28,11 @@ public class CommandManager {
     /** Performs the basic function of the chosen command and pushes it to the undoStack for when undo will be used*/
     public void executeCommand(Command com) {
         lastContainer = com.execute();
-        undoStack.push(com); //add....
-        lastCommand = com;
-        undoContainerStack.push(lastContainer);
+        if (lastContainer != null){
+            undoStack.push(com); //add....
+            lastCommand = com;
+            undoContainerStack.push(lastContainer);
+        }
     }
 
     /** Perform the undo function where it pushes and pops so that the user can both undo and redo to the

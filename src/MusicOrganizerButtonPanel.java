@@ -181,12 +181,14 @@ public class MusicOrganizerButtonPanel extends JPanel {
 		//JButton flagButton = new JButton(flagIcon);
 		flagButton.setToolTipText("Flag your song");
 		flagButton.addActionListener(new ActionListener() {
-			List<SoundClip> flaggedSong = view.returnFlaggedSong();
 			public void actionPerformed(ActionEvent e) {
+				List<SoundClip> flaggedSong = view.getSelectedSoundClips();
+				FlaggedAlbum flaggedAlbum = controller.getFlagAlbum();
 				try {
-					if (!controller.getFlagAlbum().containsClip((SoundClip) flaggedSong)) {
-						controller.getFlagAlbum().addSoundClips(flaggedSong);
-						//flaggedSong.toString().
+					for(SoundClip clip : flaggedSong){
+						if(!flaggedAlbum.containsClip(clip)){
+							flaggedAlbum.addSoundClip(clip);
+						}
 					}
 				} catch (Exception ex) {
 					System.out.println("Error");
@@ -197,54 +199,29 @@ public class MusicOrganizerButtonPanel extends JPanel {
 	}
 
 	private JButton createRateButton(){
-		/*ImageIcon rateIcon = new ImageIcon("icons/favourites_32.png");
-		JButton rateButton = new JButton("Rate");
-		//JButton rateButton = new JButton(rateIcon);
-		rateButton.setToolTipText("Rate your song");
-		rateButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//SoundClip ratedSong = (SoundClip) view.returnRatedSong();
-				List<SoundClip> ratedSong = view.returnRatedSong();
-				int rate = Integer.parseInt(view.popUpRate());
-				try {
-					if (rate == 4 || rate == 5) {
-						controller.getRateAlbum().addSoundClips(ratedSong);
-						//add nummber to song
-					} else if (rate >= 0 && rate < 4) {
-						//add nummber to song
-					}
-				}catch (Exception f){
-					view.showMessage("E du dumm eller väfään, mannen?" + f);
-				}
-			}
-		});
-		return rateButton;*/
 		ImageIcon rateIcon = new ImageIcon("icons/favourites_32.png");
 		JButton rateButton = new JButton("Rate");
 		//JButton rateButton = new JButton(rateIcon);
 		rateButton.setToolTipText("Rate your song");
 		rateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				List<SoundClip> ratedSong = view.returnRatedSong();
+				List<SoundClip> ratedSong = view.getSelectedSoundClips();
+				System.out.println("nåt skit "+ratedSong.size());
 				int rate = Integer.parseInt(view.popUpRate());
+				System.out.println(rate);
+				RatedAlbum ratedAlbum = controller.getRateAlbum();
 				try{
-					if(rate==5 || rate ==4){
-						if (!controller.getRateAlbum().containsClip((SoundClip) ratedSong)) {
-							controller.getRateAlbum().addSoundClips(ratedSong);
-							System.out.println(rate);
-							System.out.println(ratedSong);
-						}
+					if (rate == 5 || rate == 4) {
+						ratedAlbum.addSoundClips(ratedSong);
 					}
-					if(rate >=0  && rate < 4){
-                        //Do nothing
-						if(controller.getRateAlbum().containsClip((SoundClip) ratedSong)){
-							controller.getRateAlbum().removeSoundClip((SoundClip) ratedSong);
-						}
-                    }
-                } catch (Exception ex) {
-                    System.out.println("Wrooong");
+					if (rate >= 0 && rate < 4) {
+						//add rating to the sound clip
+						ratedAlbum.removeSoundClips(ratedSong);
+					}
+                } catch (Exception f) {
+                    System.out.println("E du dumm eller väfään, mannen?" + f);
                 }
-
+				view.onClipsUpdated();
             }
         });
         return rateButton;

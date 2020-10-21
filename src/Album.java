@@ -4,8 +4,6 @@ import java.util.List;
 
 //class to create album objects.
 public class Album extends AbstractAlbum{
-    private String albumName; //name of the album
-    private List<SoundClip> desiredAlbumSoundClips; //List of sound clips
     private List<Album> subAlbumList; //List of sub albums for every parent album
     private Album parentAlbum;
 
@@ -15,11 +13,6 @@ public class Album extends AbstractAlbum{
         desiredAlbumSoundClips = new LinkedList<SoundClip>();
         subAlbumList = new LinkedList<Album>();
     }
-    /*Album(String albumName, int a) { //constructor that creates the rate and flag album
-        this.albumName = albumName;
-        parentAlbum = null;
-        desiredAlbumSoundClips = new LinkedList<SoundClip>();
-    }*/
     Album(String albumName, Album parentAlbum) { //constructor that creates sub albums
         super(albumName);
         this.parentAlbum = parentAlbum;

@@ -20,6 +20,11 @@ public class FlaggedAlbum extends AbstractAlbum {
     }
 
     @Override
+    boolean containsClip(SoundClip clip) {
+        return desiredAlbumSoundClips.contains(clip);
+    }
+
+    @Override
     void removeSoundClips(List<SoundClip> clipsToRemove) {
 
     }

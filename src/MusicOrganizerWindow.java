@@ -101,10 +101,8 @@ public class MusicOrganizerWindow extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				// if left-double-click @@@changed =2 to ==1
 				if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2){
-
 					// The code here gets invoked whenever the user double clicks in the album tree
-					Album album = getSelectedAlbum();
-					clipTable.display(album);
+					clipTable.display(getSelectedAlbum());
 					System.out.println("show the sound clips for album " + getSelectedTreeNode().getUserObject());
 				}
 			}
@@ -160,13 +158,13 @@ public class MusicOrganizerWindow extends JFrame {
 				null,
 				"");
 	}
-	public List<SoundClip> returnRatedSong(){
+	/*public List<SoundClip> returnRatedSong(){
 		return getSelectedSoundClips();
 	}
 
 	public List<SoundClip> returnFlaggedSong(){
 		return getSelectedSoundClips();
-	}
+	}*/
 
 	/**Creates a pop up window showing a message
 	 * @param message - the message to display
@@ -196,10 +194,10 @@ public class MusicOrganizerWindow extends JFrame {
 	 * selection.
 	 * @return the selected album
 	 */
-	public Album getSelectedAlbum() {
+	public AbstractAlbum getSelectedAlbum() {
 		DefaultMutableTreeNode node = getSelectedTreeNode();
 		if(node != null) {
-			return (Album) node.getUserObject();
+			return (AbstractAlbum) node.getUserObject();
 		} else {
 			return null;
 		}
@@ -276,7 +274,8 @@ public class MusicOrganizerWindow extends JFrame {
 	 * 
 	 */
 	public void onClipsUpdated(){
-		Album a = (Album) getSelectedTreeNode().getUserObject();
+
+		AbstractAlbum a = (AbstractAlbum) getSelectedTreeNode().getUserObject();
 		clipTable.display(a);
 	}
 

@@ -17,10 +17,10 @@ public class MusicOrganizerController {
 		root = new Album("All Sound Clips");
 		// Create the rate album for the very guud sound clips
 
-		rate = new RatedAlbum("yes veri gud ääni lips");
+		rate = new RatedAlbum("yes veri gud ääni gobitar");
 		// Create the flag album for the flagged sound clips
 
-		flag = new FlaggedAlbum("Flagged");
+		flag = new FlaggedAlbum("flaggged gobitar");
 
 		// Create the View in Model-View-Controller
 		view = new MusicOrganizerWindow(this);
@@ -59,14 +59,14 @@ public class MusicOrganizerController {
 	 * @return
 	 */
 	public RatedAlbum getRateAlbum(){
-		return (RatedAlbum) rate;
+		return rate;
 	}
 	/**
 	 * Returns the flag album
 	 * @return
 	 */
 	public FlaggedAlbum getFlagAlbum(){
-		return (FlaggedAlbum) flag;
+		return flag;
 	}
 
 	//----------------------------------------------------------------------------------------------------------------
@@ -77,11 +77,13 @@ public class MusicOrganizerController {
 		// TODO: Add your code here
 		Album newAlbum = null;
 		try {
-			String newAlbumName = view.promptForAlbumName();
-			Album parentAlbum = view.getSelectedAlbum();
-			newAlbum = new Album(newAlbumName, parentAlbum);
-			view.onAlbumAdded(newAlbum);
-			return newAlbum;
+			AbstractAlbum parentAlbum = view.getSelectedAlbum();
+			if(parentAlbum instanceof Album){ //if and only if
+				String newAlbumName = view.promptForAlbumName();
+				newAlbum = new Album(newAlbumName, (Album) parentAlbum);
+				view.onAlbumAdded(newAlbum);
+				return newAlbum;
+			}
 		}
 		catch (NullPointerException e){
 			view.showMessage("Select an album first!");
@@ -129,11 +131,10 @@ public class MusicOrganizerController {
 	public void deleteAlbum() throws NullPointerException{
 		//TODO: Add your code here
 		try {
-			Album deleteAlbum = view.getSelectedAlbum();
-			if((deleteAlbum != root) /*|| (deleteAlbum != rate) || (deleteAlbum != flag)*/) {
-				view.onAlbumRemoved(deleteAlbum);
+			AbstractAlbum deleteAlbum = view.getSelectedAlbum();
+			if((deleteAlbum instanceof Album) && (deleteAlbum != root)) {
+				view.onAlbumRemoved((Album) deleteAlbum);
 			}
-
 		}
 		catch (NullPointerException e){
 			view.showMessage("Select an album first!");
@@ -156,9 +157,13 @@ public class MusicOrganizerController {
 		/**	Performs the normal execution */
 		@Override
 		public Container execute(){
-			Container deleteAlbum = new Container(view.getSelectedAlbum(),null);
-			deleteAlbum();
-			return deleteAlbum;
+			AbstractAlbum instance = view.getSelectedAlbum();
+			if(instance instanceof Album) {
+				Container deleteAlbum = new Container((Album) instance, null);
+				deleteAlbum();
+				return deleteAlbum;
+			}
+			return null;
 		}
 
 		/**	Performs the undo functionality */
@@ -205,9 +210,13 @@ public class MusicOrganizerController {
 		/**	Performs the normal execution */
 		@Override
 		public Container execute(){
-			Container addSoundClip = new Container(view.getSelectedAlbum(),view.getSelectedSoundClips());
-			addSoundClips();
-			return addSoundClip;
+			AbstractAlbum instance = view.getSelectedAlbum();
+			if(instance instanceof Album) {
+				Container addSoundClip = new Container((Album) instance, view.getSelectedSoundClips());
+				addSoundClips();
+				return addSoundClip;
+			}
+			return null;
 		}
 
 		/**	Performs the undo functionality */
@@ -255,9 +264,13 @@ public class MusicOrganizerController {
 		/**	Performs the normal execution */
 		@Override
 		public Container execute(){
-			Container removeSoundClip = new Container(view.getSelectedAlbum(),view.getSelectedSoundClips());
-			removeSoundClips();
-			return removeSoundClip;
+			AbstractAlbum instance = view.getSelectedAlbum();
+			if(instance instanceof Album) {
+				Container removeSoundClip = new Container((Album) instance, view.getSelectedSoundClips());
+				removeSoundClips();
+				return removeSoundClip;
+			}
+			return null;
 		}
 
 		/**	Performs the undo functionality */
