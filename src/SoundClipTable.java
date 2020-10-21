@@ -24,7 +24,6 @@ public class SoundClipTable extends JList {
 
 		if(a != null) {
 			clips.addAll(a.getSoundClipsFromAlbum());
-			System.out.println("size "+ clips.size());
 			Object[] data = new Object[clips.size()];
 			Iterator<SoundClip> it = clips.iterator();
 			int i = 0;

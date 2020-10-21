@@ -97,20 +97,22 @@ public class MusicOrganizerWindow extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// if left-double-click @@@changed =2 to ==1
-				if(e.equals(null))
 				if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2){
-					// The code here gets invoked whenever the user double clicks in the album tree
-					clipTable.display(getSelectedAlbum());
-					System.out.println("show the sound clips for album " + getSelectedTreeNode().getUserObject());
+					/**The code here gets invoked whenever the user double clicks in the album tree*/
 
-					/**
-					 * Checks if the currently selected albums should display all or a limited amount of buttons.
-					 */
-					if(getSelectedAlbum().equals(controller.getRateAlbum()) || getSelectedAlbum().equals(controller.getFlagAlbum())) {
-						sendButtonsAvailability(false, false, false, false);
-					}
-					else{
-						sendButtonsAvailability(true, true, true, true);
+					AbstractAlbum clickedInstance = getSelectedAlbum();
+					if(clickedInstance != null) { //To avoid errors when not double clicking an album.
+						clipTable.display(getSelectedAlbum());
+						System.out.println("show the sound clips for album " + getSelectedTreeNode().getUserObject());
+
+						/**
+						 * Checks if the currently selected albums should display all or a limited amount of buttons.
+						 */
+						if (getSelectedAlbum().equals(controller.getRateAlbum()) || getSelectedAlbum().equals(controller.getFlagAlbum())) {
+							sendButtonsAvailability(false, false, false, false);
+						} else {
+							sendButtonsAvailability(true, true, true, true);
+						}
 					}
 				}
 			}

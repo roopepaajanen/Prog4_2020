@@ -186,7 +186,7 @@ public class MusicOrganizerButtonPanel extends JPanel {
 					for (SoundClip clip : flaggedSoundClips) {
 						if (flaggedAlbum.containsClip(clip)) {
 							flaggedAlbum.removeSoundClip(clip);
-							clip.setColor("black");
+							clip.setColor("#000080");
 						} else {
 							flaggedAlbum.addSoundClip(clip);
 							clip.setColor("red");
